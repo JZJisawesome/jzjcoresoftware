@@ -24,7 +24,7 @@ loop:
     addi x30, x31, 0
     
     #jump to start of loop
-    jalr x0, x0, 12
+    j loop
     
     #invalid code will be displayed if we reach here because jal failed
     addi x31, x0, 4
