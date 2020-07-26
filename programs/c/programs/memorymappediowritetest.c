@@ -1,8 +1,8 @@
 
 void main(void)
 {
-    int *portADirectionRegister = (int*)(0xFFFFFFE0);
-    int *portARegister = (int*)(0xFFFFFFF0);
+    volatile int *portADirectionRegister = (int*)(0xFFFFFFE0);
+    volatile int *portARegister = (int*)(0xFFFFFFF0);
     
     *portADirectionRegister = 0xFFFFFFF0;
     
