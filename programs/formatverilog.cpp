@@ -1,3 +1,7 @@
+//BUGS TO FIX
+//Adding extra instructions/words sometimes (can't hard code number of bytes per line)
+//Verilog addresses @XXXXXXXX not being changed from bytewise to wordwise for the backned (need to / by 4)
+
 //Only parameter is the name of the file to reformat for memoryv4
 //Also mit licenced like rest of project
 //note that this is not meant to run on the cpu itself; c programs to be run on the cpu are in the c folder

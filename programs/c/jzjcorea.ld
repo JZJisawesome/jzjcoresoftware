@@ -1,6 +1,6 @@
 /* This file is MIT licenced as well*/
 /* Used lots of same resources as I used in crt0.s */
-/* Also partly based on the default linker script for normal rv32 executables by the FSF under the following liscence*/
+/* Also partly based on the default linker script for normal rv32/rv64 executables by the FSF under the following liscence*/
 /* Default linker script, for normal executables */
 /* Copyright (C) 2014-2020 Free Software Foundation, Inc.
    Copying and distribution of this script, with or without modification,
@@ -38,6 +38,5 @@ SECTIONS
     } > ram
     .data : { *(.data*) } > ram
     .bss : { *(.bss*) } > ram
-    
-    __global_pointer$ = __SDATA_BEGIN__;
+    __global_pointer$ = __SDATA_BEGIN__; /* The global pointer points to the beginning of the SDATA section */
 }
