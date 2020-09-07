@@ -18,21 +18,26 @@ MEMORY
 /* the arch is rv32 */
 OUTPUT_ARCH("riscv")
 OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
+/* After being output, objcopy can produce a verilog file to be formatted by formatverilog */
 
 /* _start is defined in crt0.s */
 ENTRY(_start)
 
-/* TODO figure out how to use global pointer*/
 SECTIONS
 {
     PROVIDE (__executable_start = ORIGIN(ram));
     PROVIDE(__stack_top = ORIGIN(ram) + LENGTH(ram));
-    PROVIDE (__executable_start = SEGMENT_START("text-segment", 0x0000));
-    . = SEGMENT_START("text-segment", 0x0000) + SIZEOF_HEADERS;
 
+    .init : { *(.init*) } > ram
     .text : { *(.text*) } > ram
     .rodata : { *(.rodata*) } > ram
-    .bss : { *(.bss*) } > ram
+    .sdata :
+    {
+        __SDATA_BEGIN__ = .; 
+        *(.sdata*)
+    } > ram
     .data : { *(.data*) } > ram
-
+    .bss : { *(.bss*) } > ram
+    
+    __global_pointer$ = __SDATA_BEGIN__;
 }

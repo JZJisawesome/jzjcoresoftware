@@ -26,7 +26,7 @@
 
 #Practically identical to https://twilco.github.io/riscv-from-scratch/2019/04/27/riscv-from-scratch-2.html
 #include "crt0.h"
-.text
+.section .init, "ax"
 .global _start
 _start:
     #Hint to assembler about start of function
@@ -34,14 +34,12 @@ _start:
     .cfi_undefined ra
     
     #Setup global pointer (todo figure out how to do this in linker script)
-    #.option push
-    #.option norelax
-    #la gp, __global_pointer$
-    #.option pop
+    .option push
+    .option norelax
+    la gp, __global_pointer$
+    .option pop
     
-    #Setup stack pointer 
-    #Should be set to (2 ^ MEM_A_WIDTH) * 4 (old way, now __stack_top is set with linker script)
-    #la sp, 16384
+    #Setup stack pointer based on linker script symbol
     la sp, __stack_top
     #Also set s0 to the value in the stack pointer
     #addi s0, sp, 0
@@ -56,6 +54,7 @@ _start:
     .cfi_endproc
     
 #Neat helper functions c programs can use
+#todo this will be for the future
 .global nop
 nop:
     .cfi_startproc

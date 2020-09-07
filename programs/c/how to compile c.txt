@@ -4,7 +4,7 @@
 riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -c ./file.c
 
 //Do this for crt0.s
-riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -S -c ./crt0.s -o crt0.o
+riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -c ./crt0.s -o crt0.o
 
 //Link everything together using jzjcorea.ld; note crt0.o MUST BE FIRST//todo fix that
 riscv64-unknown-elf-ld -T jzjcorea.ld --gc-sections -o a.out ./crt0.o ./file.o
