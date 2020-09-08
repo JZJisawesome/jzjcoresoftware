@@ -1,10 +1,14 @@
-//todo: I need to figure out how to compile code that starts at address 0 and whose stack will still be in a location in memory
-
 //Repeat this for each .c file
-riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -c ./file.c
+riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -c -mstrict-align ./file.c
 
 //Do this for crt0.s
-riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -c ./crt0.s -o crt0.o
+riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -O -c -mstrict-align ./crt0.s -o crt0.o
 
-//Link everything together using jzjcorea.ld; note crt0.o MUST BE FIRST//todo fix that
+//Link everything together using jzjcorea.ld
 riscv64-unknown-elf-ld -T jzjcorea.ld --gc-sections -o a.out ./crt0.o ./file.o
+
+//Convert to a verilog hex file
+riscv64-unknown-elf-objcopy ./a.out -O verilog
+
+//Format verilog hex file for 32 bit instead of 8 bit data (formatverilog is buggy at the moment)
+./formatverilog a
