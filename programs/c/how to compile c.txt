@@ -5,6 +5,7 @@ riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nosta
 riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align crt0.s -o crt0.o
 
 //If your application needs it, do this for jzjcorelib
+//Note: To use gcc arithmetic functions including the header file is not needed, but for other JZJCoreLIB functions it is
 riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align jzjcorelib.S -o jzjcorelib.o
 
 //Link everything together using jzjcorea.ld

@@ -8,8 +8,8 @@
 //JZJCoreLib custom functions
 
 //Needed by gcc
-extern int __mulsi3 (int a, int b);//Not implemented
-extern long __mulsi3 (int a, int b);//Not implemented
-extern long long __mulsi3 (int a, int b);//Not implemented
+extern int __mulsi3(int a, int b);
+extern long __muldi3(int a, int b);//Not implemented
+extern long long __multi3(int a, int b);//Not implemented
 
 #endif
