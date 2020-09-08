@@ -1,11 +1,15 @@
+#MIT licensed
+#Provides gcc arithmetic functions as well as some nice other ones
+#Note: For RV32, long and int are the same size (1 word)
 .text
 
-.global __muldi3
-__muldi3:#long a, long b
+/* GCC Integer Routines */
+
+#TODO maybe use shifts like division to speed things up
 .global __mulsi3
 __mulsi3:#int a, int b
-    #Note: For RV32, long and int are the same size (1 word)
-    
+.global __muldi3
+__muldi3:#long a, long b
     bge a1, a0, 1f#If b is bigger that a, it should be the amount that is incremented by, and vice-versa
     
     #a was bigger than b
@@ -28,7 +32,7 @@ __mulsi3:#int a, int b
     li t2, 0#Initialize loop iterator to 0; TODO ensure an int sized iterator is big enough
     li a0, 0#Initialize result register to 0
     
-4:  #Multiplication Loop
+4:  #Multiplication loop
     beq t2, a1, 5f#Check if we have finished multiplying (if we have added t0 to the result register a1 times)
     add a0, a0, t0#Add t0 to the value in the result register
     addi t2, t2, 1#Increment loop iterator
@@ -40,4 +44,24 @@ __mulsi3:#int a, int b
     sub a0, zero, a0#Negate the result in the case that it is
     
 6:  #Return the result
-    ret#long or int for __muldi3 or __mulsi3
+    ret#int or long for __mulsi3 or __muldi3
+    
+#Very useful website for division
+#I will use their shift idea in the future, but for now their slower idea (close to what I was already thinking of) is fine
+#TODO use their faster idea
+#http://www.tofla.iconbar.com/tofla/arm/arm02/index.htm
+.global __udivsi3
+__udivsi3:#unsigned int a, unsigned int b
+.global __udivdi3
+__udivdi3:#unsigned long a, unsigned long b
+    mv t0, a0#Move a to t0
+    li a0, 0#Clear the result register
+    
+1:  #Division loop
+    sub t0, t0, a1#Subtract b from a
+    bltz t0, 2f#End the division if b cannot be taken out of a any more times
+    addi a0, a0, 1#Increment the result register
+    j 1b#Try to take b out of a again
+    
+2:  #a0 now contains the number of times b went into a
+    ret#int or long for __udivsi3 or __udivdi3
