@@ -53,14 +53,5 @@ _start:
     #Hint to the assembler about the end of the function
     .cfi_endproc
     
-#Neat helper functions c programs can use
-#todo this will be for the future
-.global nop
-nop:
-    .cfi_startproc
-    nop
-    ret
-    .cfi_endproc
-    
     #Hint to assembler about end of file
     .end
