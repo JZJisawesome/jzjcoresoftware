@@ -11,8 +11,12 @@ riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nosta
 //Link everything together using jzjcorea.ld
 riscv64-unknown-elf-ld -T jzjcorea.ld --gc-sections -o a.out crt0.o jzjcorelib.o file.o
 
-//Convert to a verilog hex file
-riscv64-unknown-elf-objcopy ./a.out -O verilog
+//Convert to a verilog hex file with 4 byte chunks
+//Note: Figuring out that objcopy has a --verilog-data-width took me hours. I am crying adding it here
+//riscv64-unknown-elf-objcopy ./a.out -O verilog --verilog-data-width=4
 
-//Format verilog hex file for 32 bit instead of 8 bit data (formatverilog is buggy at the moment)
-./formatverilog a
+//Objcopy is partly broken as verilog addresses it outputs are byte-wise even though the data is correctly 32 bit
+//Use this wrapper script instead (takes the file name as the first parameter and converts it to a proper verilog hex file for JZJCore)
+//Note: riscv64-unknown-elf-objcopy must be in the PATH variable
+//Note: overwrites original elf file, and produces originalfilename.hex
+../convertelf.sh ./a.out

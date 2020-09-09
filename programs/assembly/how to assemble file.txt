@@ -1,5 +1,5 @@
 riscv64-unknown-elf-as --march=rv32i ./file.s -o file.o
 riscv64-unknown-elf-objcopy ./file.o -O verilog
-./formatverilog file.o
+../convertelf.sh file.o
 # And boom! Verilog file that can be used with the core
 # Note: execution starts at @00000000
