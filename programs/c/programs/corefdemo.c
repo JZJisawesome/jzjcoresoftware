@@ -1,3 +1,5 @@
+#include "JZJCoreLib.h"
+
 //Must only contain the characters 0 - 9 and a - f
 int convertCharTo4Bit(char character)
 {
@@ -24,51 +26,54 @@ int convertStringToWord(const char string[8])
     return temp;
 }
 
-//These are the same thing
-volatile int *port5Register = (int*)(0xFFFFFFF4);
-//#define PORT5 *(int*)(0xFFFFFFF4)//todo figure out how to make this volatile
-
 //Main (called after _start)
 void main()
 {
-    *port5Register = convertStringToWord("123c0f32");//"123 CoreF 32"
+    //We could just use 0x notation, but where's the fun in that?
+    PORT5 = convertStringToWord("123c0f32");//"123 CoreF 32"
+    PORT5 = convertStringToWord("123abcde");
+    PORT5 = convertStringToWord("deadbeef");
     
     //Shift ones in from the right, then shift zeroes in to clear the ones (a fun pattern)
-    signed int temp = 0x80000000;//Set the top bit
-    *port5Register = 0x80000000;
-    for (int i = 0; i < 31; ++i)//Shift in ones
+    for (int i = 0; i < 10; ++i)
     {
-        temp = temp >> 1;//Arithmetic shift
-        *port5Register = temp;
+        signed int temp = 0x80000000;//Set the top bit
+        PORT5 = 0x80000000;
+        for (int j = 0; j < 31; ++j)//Shift in ones
+        {
+            temp = temp >> 1;//Arithmetic shift
+            PORT5 = temp;
+        }
+        
+        temp = 0x7fffffff;//Zero the top bit
+        PORT5 = 0x7fffffff;
+        for (int j = 0; j < 31; ++j)//Shift in zeroes
+        {
+            temp = temp >> 1;//It no longer matters if this is a logical or arithmetic shift
+            PORT5 = temp;
+        }
     }
     
-    temp = 0x7fffffff;//Zero the top bit
-    *port5Register = 0x7fffffff;
-    for (int i = 0; i < 31; ++i)//Shift in zeroes
-    {
-        temp = temp >> 1;//It no longer matters if this is a logical or arithmetic shift
-        *port5Register = temp;
-    }
-    
-    /*Todo need to implement arithmetic functions (I think I will save this for another test program)
+    /*
+    Todo need to implement arithmetic functions (I think I will save this for another test program)
     //Now for some intense stuff
     volatile int x = 20, y = 21;
-    *port5Register = x * y;//lol
+    PORT5 = x * y;//lol
     
     x = 10;
     y = 10;
-    *port5Register = x^y;//This will take forever
+    PORT5 = x^y;//This will take forever
     
     x = 9999;
     y = 9;
-    *port5Register = x / y;//So will this
+    PORT5 = x / y;//So will this
     
     volatile short xFloat = 1.5;
     y = 100;
-    *port5Register = (int)(xFloat*y);//So will this
+    PORT5 = (int)(xFloat*y);//So will this
     */
     
-    *port5Register = 0x123c0f32;//"123 CoreF 32"
+    PORT5 = convertStringToWord("123c0f32");//"123 CoreF 32"
     
     return;
 }

@@ -1,12 +1,12 @@
-volatile int *port5Register = (int*)(0xFFFFFFF4);
+#include "JZJCoreLib.h"
 
 void main(void)
 {
     //Term n - 2, n -1, and n
     int x = 0, y = 1, z;
     
-    *port5Register = x;//Display term 0
-    *port5Register = y;//Display term 1
+    PORT5 = x;//Display term 0
+    PORT5 = y;//Display term 1
     
     while (1)
     {
@@ -18,9 +18,7 @@ void main(void)
         y = z;
         
         //Update contents of mmio register
-        *port5Register = z;
+        PORT5 = z;
     }
-    
-    return;
 }
  

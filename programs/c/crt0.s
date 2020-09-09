@@ -33,7 +33,7 @@ _start:
     .cfi_startproc
     .cfi_undefined ra
     
-    #Setup global pointer (todo figure out how to do this in linker script)
+    #Setup global pointer
     .option push
     .option norelax
     la gp, __global_pointer$

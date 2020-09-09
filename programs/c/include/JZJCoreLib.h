@@ -60,4 +60,6 @@ extern int __umodsi3(unsigned int a, unsigned int b);//Not implemented
 extern unsigned long __umoddi3(unsigned long a, unsigned long b);//Not implemented
 extern unsigned long long __umodti3(unsigned long long a, unsigned long long b);//Not implemented
 
+//GCC Floating Point Routines
+
 #endif

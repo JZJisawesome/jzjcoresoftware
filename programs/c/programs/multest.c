@@ -1,9 +1,10 @@
 #include "JZJCoreLib.h"
 
-volatile int a = 20;//Volatile so it is not done at compile time
-volatile int b = 21;//Volatile so it is not done at compile time
-volatile unsigned int ua = 420;//Volatile so it is not done at compile time
-volatile unsigned int ub = 21;//Volatile so it is not done at compile time
+//Volatile so they are not calculated at compile time
+volatile int a = 20;
+volatile int b = 21;
+volatile unsigned int ua = 420;
+volatile unsigned int ub = 21;
 
 void main()
 {
@@ -16,7 +17,6 @@ void main()
     PORT5 = result;
     
     //Testing unsigned division too
-    volatile unsigned int ua = 420;
     result = ua / ub;
     PORT5 = result;//Should return 20 (0x14)
     

@@ -4,7 +4,7 @@ void main(void)
     volatile int *portADirectionRegister = (int*)(0xFFFFFFE0);
     volatile int *portARegister = (int*)(0xFFFFFFF0);
     
-    *portADirectionRegister = 0xFFFFFFF0;
+    *portADirectionRegister = 0xFFFFFFF0;//Compatibility with older cores
     
     while (1)
     {
