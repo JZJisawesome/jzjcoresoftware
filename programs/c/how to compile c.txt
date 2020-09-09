@@ -1,12 +1,12 @@
 //Repeat this for each .c file
-riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align file.c
+riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align -I ./include file.c
 
 //Do this for crt0.s
 riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align crt0.s -o crt0.o
 
 //If your application needs it, do this for jzjcorelib
 //Note: To use gcc arithmetic functions including the header file is not needed, but for other JZJCoreLIB functions it is
-riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align jzjcorelib.S -o jzjcorelib.o
+riscv64-unknown-elf-gcc -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align JZJCoreLib.S -o JZJCoreLib.o
 
 //Link everything together using jzjcorea.ld
 riscv64-unknown-elf-ld -T jzjcorea.ld --gc-sections -o a.out crt0.o jzjcorelib.o file.o
