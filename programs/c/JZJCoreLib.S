@@ -10,7 +10,21 @@
 __mulsi3:#int a, int b
 .global __muldi3
 __muldi3:#long a, long b
-    bge a1, a0, 1f#If b is bigger that a, it should be the amount that is incremented by, and vice-versa
+    #Put abs(a) into t0 for testing
+    mv t0, a0
+    bgez t0, 7f#Don't negate a if it is already positive
+    sub t0, zero, t0#Negate a to make it positive
+7:#TODO put all numbered labels in order
+
+    #Put abs(b) into t1 testing
+    mv t1, a1
+    bgez t1, 8f#Don't negate b if it is already positive
+    sub t1, zero, t1#Negate b to make it positive
+8:#TODO put all numbered labels in order
+    
+    bge t1, t0, 1f#If abs(b) is bigger than abs(a), it should be the amount that is incremented by, and vice-versa
+    
+    #We don't need the current values of t0 and t1 anymore
     
     #a was bigger than b
     mv t0, a0#Move a to register t0
@@ -46,6 +60,10 @@ __muldi3:#long a, long b
 6:  #Return the result
     ret#int or long for __mulsi3 or __muldi3
     
+.global __multi3#TODO implement
+__multi3:#long long a, long long b
+    ret#long long
+
 #Very useful website for division
 #I will use their shift idea in the future, but for now their slower idea (close to what I was already thinking of) is fine
 #TODO use their faster idea
