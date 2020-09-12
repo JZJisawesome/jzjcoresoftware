@@ -51,9 +51,9 @@ void main()
     
     //Unsigned Division
     PORT5 = ua / ub;//0 (0x0)
-    PORT5 = uc / ua;//
-    PORT5 = ud / ub;//
-    PORT5 = uc / ud;//
+    PORT5 = uc / ua;//50000000 (0x2FAF080)
+    PORT5 = ud / ub;//204522252 (0xC30C30C)
+    PORT5 = uc / ud;//0 (0x0)
     //todo other types
     
     //todo other operations

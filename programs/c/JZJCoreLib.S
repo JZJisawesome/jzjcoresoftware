@@ -1,6 +1,6 @@
 #MIT licensed
 #Provides gcc arithmetic functions as well as some nice other ones
-#Note: For RV32, long and int are the same size (1 word)
+#Note: For RV32, long and int are the same size (1 word), so many functions share identical code
 .text
 
 /* GCC Integer Routines */
@@ -58,28 +58,49 @@ __muldi3:#long a, long b
     sub a0, zero, a0#Negate the result in the case that it is
     
 6:  #Return the result
-    ret#int or long for __mulsi3 or __muldi3
-    
-.global __multi3#TODO implement
-__multi3:#long long a, long long b
-    ret#long long
+    ret#int/long (__mulsi3/__muldi3)
 
 #Very useful website for division
-#I will use their shift idea in the future, but for now their slower idea (close to what I was already thinking of) is fine
-#TODO use their faster idea
 #http://www.tofla.iconbar.com/tofla/arm/arm02/index.htm
+#I used their algorithm (the "To divide 50 (%110010) by 10 (%1010) in binary") to implement this, but I did not copy their code
+#TODO speed up even more
 .global __udivsi3
 __udivsi3:#unsigned int a, unsigned int b
 .global __udivdi3
 __udivdi3:#unsigned long a, unsigned long b
+    beqz a1, 5f#Bail out if b = 0
+
     mv t0, a0#Move a to t0
     li a0, 0#Clear the result register
     
-1:  #Division loop
-    sub t0, t0, a1#Subtract b from a
-    bltz t0, 2f#End the division if b cannot be taken out of a any more times
-    addi a0, a0, 1#Increment the result register
-    j 1b#Try to take b out of a again
+    bgtu a1, t0, 5f#Return 0 if b is greater than a
     
-2:  #a0 now contains the number of times b went into a
-    ret#int or long for __udivsi3 or __udivdi3
+    li t1, 1#Initialize the bit mask register with 1
+    #t0 contains a, a1 contains b
+
+    #Shift b left until it is just under or equal to the value of a
+1:  #Initial left shift loop
+    slli t2, a1, 1#Shift b by 1 and store in t2
+    bgtu t2, t0, 3f#That shift was too much; b would be greater than a, so that means we don't have to shift anymore
+    bltu t2, a1, 3f#The shift overflowed so we can't shift anymore
+    slli a1, a1, 1#The shift would still make b less than or equal to a and it didn't overflow b, so we actually perform the shift
+    slli t1, t1, 1#Shift the bitmask along with b
+    j 1b#We need to shift more; repeat the loop
+    
+    #TODO redo labels
+
+3:  #Actual Division Loop (t0 contains a, a1 contains the shifted b, t1 contains a bit mask)
+    blt t0, a1, 4f#b is bigger than a, so we cannot subtract this iteration
+    sub t0, t0, a1#Subtract b from a
+    or a0, a0, t1#We subtracted so we should set the corresponding bit in the result register (or a0 with the mask t2)
+4:  #Second part of loop; preparing for next iteration
+    srli a1, a1, 1#Shift b back right 1 position
+    srli t1, t1, 1#Shift the bit mask back right 1 position
+    bnez t1, 3b#We are not done dividing (shift times != 0 because the bit mask != 0) so keep looping
+
+5:  #Return the result register
+    ret#int/long (__udivsi3/__udivdi3)
+
+    
+    
+
