@@ -76,5 +76,11 @@ void main()
     
     //todo other operations
     
+    
+    //TODO organize this into its own category
+    lresult = la << lb;
+    //PORT5 = la << lb;
+    PORT5 = lresult;
+    
     return;
 }

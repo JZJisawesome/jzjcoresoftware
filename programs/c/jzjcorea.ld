@@ -18,6 +18,7 @@ MEMORY
 /* the arch is rv32 */
 OUTPUT_ARCH("riscv")
 OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
+GROUP(libgcc.a)
 /* After being output, objcopy can produce a verilog file to be formatted by formatverilog */
 
 /* _start is defined in crt0.s */
