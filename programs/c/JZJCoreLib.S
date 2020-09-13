@@ -2,6 +2,9 @@
 #Contains code for all JZJCoreLib functions and GCC integer/floating point routines
 #Obviously no macros are defined here (defined in header files in the JZJCoreLib folder)
 
+#TODO in the future when this gets more complex, separate out into more compilation units
+#Tutorial on creating static library: https://renenyffenegger.ch/notes/development/languages/C-C-plus-plus/GCC/create-libraries/index
+
 #Note: For RV32, long and int are the same size (1 word), so many functions share identical code
 .text
 
@@ -33,24 +36,20 @@ __muldi3:#long a, long b
     li t2, 0x00000001#Setup the bit mask
     li a0, 0#Clear the result register
     
-    #Begin the initial iteration of loop
-    j 4f#Don't shift the bit mask the first time around
-    
 3:  #Multiplication loop (t0 contains a, a1 contains b, t2 contains bit mask)
+    and t3, a1, t2#Check the bit specified by the bit mask in b (t3 is a temporary register)
+    beqz t3, 4f#If the bit was not set, skip adding
+    add a0, a0, t0#Add a to a0
+4:  #Either added or didn't add this iteration
     slli t2, t2, 1#Shift the bit mask left for the next loop iteration
     slli t0, t0, 1#Shift t0 left for the next loop iteration
-    beqz t2, 5f#We have gone through all the bits because the bitmask is now 0, so we end the multiplication loop here
-4:  #Skipping bitmask and t0 shift initially
-    and t3, a1, t2#Check the bit specified by the bit mask in b (t3 is a temporary register)
-    beqz t3, 3b#If the bit was not set, go to the next iteration (t3 is a temporary register)
-    add a0, a0, t0#Add a to a0
-    j 3b
+    bnez t2, 3b#Check if we are done multiplying (the 1 has been shifted out of the bitmask), else go back to the beginning of the loop
     
-5:  #Negate the result if t1 was set
-    beqz t1, 6f#Check if the negative flag was not set
+    #Negate the result if t1 was set
+    beqz t1, 5f#Check if the negative flag was not set
     sub a0, zero, a0#Negate the result in the case that it is
     
-6:  ret#int/long (__mulsi3/__muldi3)
+5:  ret#int/long (__mulsi3/__muldi3)
 
 #Very useful website for division
 #http://www.tofla.iconbar.com/tofla/arm/arm02/index.htm
@@ -63,7 +62,7 @@ __udivdi3:#unsigned long a, unsigned long b
     mv t0, a0#Move a to t0
     li a0, 0#Clear the result register
     
-    bgtu a1, t0, 5f#Return 0 if b is greater than a
+    bgtu a1, t0, 4f#Return 0 if b is greater than a
     
     li t1, 0x00000001#Initialize the bit mask register
     #t0 contains a, a1 contains b
@@ -71,26 +70,24 @@ __udivdi3:#unsigned long a, unsigned long b
     #Shift b left until it is just under or equal to the value of a
 1:  #Initial left shift loop
     slli t2, a1, 1#Shift b by 1 and store in t2
-    bgtu t2, t0, 3f#That shift was too much; b would be greater than a, so that means we don't have to shift anymore
-    bltu t2, a1, 3f#The shift overflowed, so we can't possibly have to shift anymore
+    bgtu t2, t0, 2f#That shift was too much; b would be greater than a, so that means we don't have to shift anymore
+    bltu t2, a1, 2f#The shift overflowed, so we can't possibly have to shift anymore
     slli a1, a1, 1#The shift would still make b less than or equal to a and it didn't overflow b, so we actually perform the shift on b
     slli t1, t1, 1#Shift the bitmask along with b
     j 1b#We need to shift more; repeat the loop
-    
-    #TODO redo label numbers
 
-3:  #Actual Division Loop (t0 contains a, a1 contains the shifted b, t1 contains a bit mask)
-    blt t0, a1, 4f#b is bigger than a, so we cannot subtract this iteration
+2:  #Actual Division Loop (t0 contains a, a1 contains the shifted b, t1 contains a bit mask)
+    blt t0, a1, 3f#b is bigger than a, so we cannot subtract this iteration
     sub t0, t0, a1#Subtract b from a
     or a0, a0, t1#We subtracted so we should set the corresponding bit in the result register (or a0 with the mask t2)
-4:  #Second part of loop; preparing for next iteration
+3:  #Second part of loop; preparing for next iteration
     srli a1, a1, 1#Shift b back right 1 position
     srli t1, t1, 1#Shift the bit mask back right 1 position
     bnez t1, 3b#We are not done dividing (shift times != 0 because the bit mask != 0) so keep looping
 
-5:  ret#unsigned int/unsigned long (__udivsi3/__udivdi3)
+4:  ret#unsigned int/unsigned long (__udivsi3/__udivdi3)
 
-#Based heavily on the division function and its website reference
+#Based heavily on the division function
 #TODO speed up even more
 .global __umodsi3
 __umodsi3:#unsigned int a, unsigned int b
