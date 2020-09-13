@@ -1,8 +1,10 @@
+#include <JZJCoreLib/io.h>
 #include <assert.h>
 
 void main()
 {
-    assert(123 == 456);
     
+
+    assert(PORT1 == 0);
     return;
 }
