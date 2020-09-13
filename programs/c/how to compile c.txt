@@ -1,15 +1,15 @@
 //Repeat this for each .c file
-riscv64-unknown-elf-gcc -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -I ./include -c file.c -o file.o
+riscv64-unknown-elf-gcc -std=c18 -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -I ./include -c file.c -o file.o
 
 //Do this for crt0.s
-riscv64-unknown-elf-gcc -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -c crt0.s -o crt0.o
+riscv64-unknown-elf-gcc -std=c18 -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -c crt0.s -o crt0.o
 
 //If your application needs it, do this for jzjcorelib
 //Note: To use gcc arithmetic functions including the header file is not needed, but for other JZJCoreLIB functions it is
-riscv64-unknown-elf-gcc -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -c JZJCoreLib.S -o JZJCoreLib.o
+riscv64-unknown-elf-gcc -std=c18 -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -c JZJCoreLib.S -o JZJCoreLib.o
 
 //Link everything together using jzjcorea.ld
-riscv64-unknown-elf-gcc -T jzjcorea.ld -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -o file crt0.o JZJCoreLib.o file.o
+riscv64-unknown-elf-gcc -std=c18 -T jzjcorea.ld -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -o file crt0.o JZJCoreLib.o file.o
 
 //Convert to a verilog hex file with 4 byte chunks
 //Note: Figuring out that objcopy has a --verilog-data-width took me hours. I am crying adding it here

@@ -35,7 +35,7 @@ void main()
     PORT5 = ud * ub;//90194313195 (0x14FFFFFFEB), which cannot fit in a word, so it becomes 4294967275 (0xFFFFFFEB)
     PORT5 = uc * ud;//0x3B9AC9FFC4653600, which cannot fit in a word, so it becomes 0xC4653600
     //long long
-    /*lresult = la * lb;
+    lresult = la * lb;
     PORT5 = (int)(lresult);
     lresult = la * lc;
     PORT5 = (int)(lresult);
@@ -51,7 +51,7 @@ void main()
     ulresult = uld * ulb;
     PORT5 = (int)(ulresult);
     ulresult = ulc * uld;
-    PORT5 = (int)(ulresult);*///Todo implement functions in JZJCoreLib
+    PORT5 = (int)(ulresult);
     
     //Unsigned Division
     //int
@@ -74,12 +74,6 @@ void main()
     //todo other types
     
     //todo other operations
-    
-    
-    //TODO organize this into its own category
-    lresult = la << lb;
-    //PORT5 = la << lb;
-    PORT5 = lresult;
     
     return;
 }
