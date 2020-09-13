@@ -19,6 +19,8 @@ void main()
     volatile double dresult;
     volatile long double qresult;
     
+    //todo floating point
+    
     //Multiplication
     //int
     PORT5 = a * b;//420 (0x1A4)
@@ -50,10 +52,23 @@ void main()
     PORT5 = (int)(ulresult);*///Todo implement functions in JZJCoreLib
     
     //Unsigned Division
+    //int
+    //todo
+    //unsigned int
     PORT5 = ua / ub;//0 (0x0)
     PORT5 = uc / ua;//50000000 (0x2FAF080)
     PORT5 = ud / ub;//204522252 (0xC30C30C)
     PORT5 = uc / ud;//0 (0x0)
+    //todo other types
+    
+    //Unsigned Modulus
+    //int
+    //todo
+    //unsigned int
+    PORT5 = ua % ub;//20 (0x14)
+    PORT5 = uc % ua;//0 (0x0)
+    PORT5 = ud % ub;//3 (0x3)
+    PORT5 = uc % ud;//1000000000 (0x3B9ACA00)
     //todo other types
     
     //todo other operations
