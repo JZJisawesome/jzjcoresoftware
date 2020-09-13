@@ -1,4 +1,7 @@
 #include "JZJCoreLib/io.h"
+#include "JZJCoreLib/emulation.h"
+
+//TODO call emulation routines directly to ensure they are used
 
 //This file is used to test JZJCoreLib integer and floating point emulation routines
 void main()

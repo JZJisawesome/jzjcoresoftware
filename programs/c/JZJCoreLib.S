@@ -10,6 +10,8 @@
 
 /* GCC Integer Routines */
 
+#Arithmetic functions
+
 #Usefull sources:
 #https://stackoverflow.com/questions/2751583/multiply-with-negative-integer-just-by-shifting
 #https://stackoverflow.com/questions/37440394/left-shift-multiplication-assembly
@@ -117,3 +119,12 @@ __umoddi3:#unsigned long a, unsigned long b
     #When the loop exits, a0 will contain the remainder
 
 4:  ret#unsigned int/unsigned long (__umodsi3/__umoddi3)
+
+#Bit operations
+/*
+.global __bswapsi2
+__bswapsi2:#int a
+    #TODO implement
+
+    ret#int
+*/

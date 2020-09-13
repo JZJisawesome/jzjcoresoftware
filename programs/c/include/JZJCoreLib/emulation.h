@@ -4,7 +4,9 @@
 #ifndef JZJCORELIB_EMULATION_H
 #define JZJCORELIB_EMULATION_H
 
-//GCC Integer Routines
+/* GCC Integer Routines */
+
+//Arithmetic functions
 extern int __divsi3(int a, int b);//Not implemented
 extern long __divdi3(long a, long b);//Not implemented
 extern long long __divti3(long long a, long long b);//Not implemented
@@ -25,7 +27,12 @@ extern int __umodsi3(unsigned int a, unsigned int b);
 extern unsigned long __umoddi3(unsigned long a, unsigned long b);
 extern unsigned long long __umodti3(unsigned long long a, unsigned long long b);//Not implemented
 
-//GCC Floating Point Routines
+//Bit operations
+//todo other routine definitions
+extern int __bswapsi2(int a);//Not implemented
+extern long long __bswapdi2(long long a);//Not implemented
+
+/* GCC Floating Point Routines */
 //todo 
 
 #endif
