@@ -1,5 +1,7 @@
 #MIT licensed
-#Provides gcc arithmetic functions as well as some nice other ones
+#Contains code for all JZJCoreLib functions and GCC integer/floating point routines
+#Obviously no macros are defined here (defined in header files in the JZJCoreLib folder)
+
 #Note: For RV32, long and int are the same size (1 word), so many functions share identical code
 .text
 

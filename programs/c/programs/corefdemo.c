@@ -1,4 +1,4 @@
-#include "JZJCoreLib.h"
+#include "JZJCoreLib/io.h"
 
 //Must only contain the characters 0 - 9 and a - f
 int convertCharTo4Bit(char character)

@@ -1,4 +1,4 @@
-#include "JZJCoreLib.h"
+#include "JZJCoreLib/io.h"
 
 //Volatile so they are not calculated at compile time
 volatile int a = 20;

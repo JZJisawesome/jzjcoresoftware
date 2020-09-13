@@ -1,4 +1,4 @@
-#include "JZJCoreLib.h"
+#include "JZJCoreLib/io.h"
 
 //This file is used to test JZJCoreLib integer and floating point emulation routines
 void main()
