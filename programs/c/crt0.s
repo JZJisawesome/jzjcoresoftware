@@ -48,6 +48,7 @@ _start:
     jal x1, main
     
     #Halt cpu if we ever return from main
+    #TODO we should be calling destructors (the c atexit() function) before we halt
     ecall
     
     #Hint to the assembler about the end of the function
