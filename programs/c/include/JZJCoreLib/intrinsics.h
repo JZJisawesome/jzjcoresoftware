@@ -1,3 +1,4 @@
+//Macros for useful instructions not accessible from C/C++
 #ifndef JZJCORELIB_INTRINSICS_H
 #define JZJCORELIB_INTRINSICS_H
 

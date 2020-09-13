@@ -1,7 +1,7 @@
+//Memory Mapped IO Port Pointer Macros
 #ifndef JZJCORELIB_IO_H
 #define JZJCORELIB_IO_H
 
-//Memory Mapped IO Port Pointer Macros
 #ifdef JZJCORELIB_LONG_NAMES
     #define JZJCORE_PORT0 (*(volatile int*)(0xFFFFFFE0))
     #define JZJCORE_PORT1 (*(volatile int*)(0xFFFFFFE4))
