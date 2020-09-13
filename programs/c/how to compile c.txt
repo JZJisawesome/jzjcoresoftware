@@ -9,8 +9,7 @@ riscv64-unknown-elf-gcc -static-libgcc -lgcc -fdata-sections -ffunction-sections
 riscv64-unknown-elf-gcc -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -c JZJCoreLib.S -o JZJCoreLib.o
 
 //Link everything together using jzjcorea.ld
-riscv64-unknown-elf-ld --gc-sections -T jzjcorea.ld -o a.out crt0.o JZJCoreLib.o file.o
-riscv64-unknown-elf-gcc -T jzjcorea.ld -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -o a.out ./crt0.o
+riscv64-unknown-elf-gcc -T jzjcorea.ld -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -o file crt0.o JZJCoreLib.o file.o
 
 //Convert to a verilog hex file with 4 byte chunks
 //Note: Figuring out that objcopy has a --verilog-data-width took me hours. I am crying adding it here

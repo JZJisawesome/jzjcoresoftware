@@ -1,5 +1,4 @@
 #include "JZJCoreLib/io.h"
-#include "JZJCoreLib/emulation.h"
 
 //TODO call emulation routines directly to ensure they are used
 

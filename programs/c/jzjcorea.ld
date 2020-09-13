@@ -19,7 +19,7 @@ MEMORY
 OUTPUT_ARCH("riscv")
 OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
 GROUP(libgcc.a)
-/* After being output, objcopy can produce a verilog file to be formatted by formatverilog */
+/* After being output, convertelf.sh can produce a verilog hex file */
 
 /* _start is defined in crt0.s */
 ENTRY(_start)
