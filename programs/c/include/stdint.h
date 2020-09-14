@@ -147,4 +147,15 @@ typedef unsigned int* uintptr_t;
 
 #define UINTMAX_C(constant) constantULL
 
+/* Other Numeric Limits */
+
+//TODO
+//#define PTRDIFF_MIN
+//#define PTRDIFF_MAX
+//#define SIZE_MAX
+//#define SIG_ATOMIC_MIN
+//#define SIG_ATOMIC_MAX
+//#define WINT_MIN
+//#define WINT_MAX
+
 #endif
