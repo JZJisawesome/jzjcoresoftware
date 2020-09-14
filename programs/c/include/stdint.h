@@ -123,9 +123,9 @@ typedef unsigned int* uintptr_t;
 #define UINT_LEAST32_MAX 0xFFFFFFFF
 #define UINT_LEAST64_MAX 0xFFFFFFFFFFFFFFFF
 
-#define INTPTR_MAX 0xFFFFFFFF
+#define UINTPTR_MAX 0xFFFFFFFF
 
-#define INTMAX_MAX 0xFFFFFFFFFFFFFFFF
+#define UINTMAX_MAX 0xFFFFFFFFFFFFFFFF
 
 /* Function Macros For Constants */
 

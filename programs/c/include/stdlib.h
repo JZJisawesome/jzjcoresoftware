@@ -27,6 +27,7 @@
 #define EXIT_FAILURE 1
 
 /* String Functions */
+//TODO include needed headers for size_t, errno_t and wchar_t
 
 //Null Terminated String Parsing
 //TODO implement
@@ -43,11 +44,11 @@ double strtod(const char* restrict str, char** restrict str_end);
 long double strtold(const char* restrict str, char** restrict str_end);
 
 //Null Terminated Multibyte String Functions
-//TODO include needed headers for size_t and errno_t
+
 //TODO implement
-int mblen(const char* s, size_t n);
-int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);
-int wctomb(char* s, wchar_t wc);
+//int mblen(const char* s, size_t n);
+//int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);
+//int wctomb(char* s, wchar_t wc);
 //errno_t wctomb_s(int* restrict status, char* restrict s, rsize_t ssz, wchar_t wc);
 //size_t mbstowcs(wchar_t* restrict dst, const char* restrict src, size_t len);
 //errno_t mbstowcs_s(size_t* restrict retval, wchar_t* restrict dst, rsize_t dstsz, const char* restrict src, rsize_t len);
