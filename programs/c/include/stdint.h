@@ -45,48 +45,46 @@ typedef unsigned int* uintptr_t;
 
 /* Macro Constants */
 
-//TODO finish
-
 //Signed
 //Minimum
-#define INT8_MIN -128
-//#define INT16_MIN 
-//#define INT32_MIN 
-//#define INT64_MIN 
+#define INT8_MIN 0x80
+#define INT16_MIN 0x8000
+#define INT32_MIN 0x80000000
+#define INT64_MIN 0x8000000000000000
 
-//#define INT_FAST8_MIN
-//#define INT_FAST16_MIN 
-//#define INT_FAST32_MIN 
-//#define INT_FAST64_MIN 
+#define INT_FAST8_MIN 0x80000000//TODO ensure int actually is the fastest
+#define INT_FAST16_MIN 0x80000000//TODO ensure int actually is the fastest
+#define INT_FAST32_MIN 0x80000000
+#define INT_FAST64_MIN 0x8000000000000000
 
-#define INT_LEAST8_MIN -128
-//#define INT_LEAST16_MIN 
-//#define INT_LEAST32_MIN 
-//#define INT_LEAST64_MIN 
+#define INT_LEAST8_MIN 0x80
+#define INT_LEAST16_MIN 0x8000
+#define INT_LEAST32_MIN 0x80000000
+#define INT_LEAST64_MIN 0x8000000000000000
 
-//#define INTPTR_MIN 
+#define INTPTR_MIN 0x80000000
 
-//#define INTMAX_MIN 
+#define INTMAX_MIN 0x8000000000000000
 
 //Maximum
-#define INT8_MAX 127
-//#define INT16_MAX 
-//#define INT32_MAX 
-//#define INT64_MAX 
+#define INT8_MAX 0x7F
+#define INT16_MAX 0x7FFF
+#define INT32_MAX 0x7FFFFFFF
+#define INT64_MAX 0x7FFFFFFFFFFFFFFF
 
-//#define INT_FAST8_MAX
-//#define INT_FAST16_MAX 
-//#define INT_FAST32_MAX 
-//#define INT_FAST64_MAX 
+#define INT_FAST8_MAX 0x7FFFFFFF//TODO ensure int actually is the fastest
+#define INT_FAST16_MAX 0x7FFFFFFF//TODO ensure int actually is the fastest
+#define INT_FAST32_MAX 0x7FFFFFFF
+#define INT_FAST64_MAX 0x7FFFFFFFFFFFFFFF
 
-#define INT_LEAST8_MAX 127
-//#define INT_LEAST16_MAX 
-//#define INT_LEAST32_MAX 
-//#define INT_LEAST64_MAX 
+#define INT_LEAST8_MAX 0x7F
+#define INT_LEAST16_MAX 0x7FFF
+#define INT_LEAST32_MAX 0x7FFFFFFF
+#define INT_LEAST64_MAX 0x7FFFFFFFFFFFFFFF
 
-//#define INTPTR_MAX 
+#define INTPTR_MAX 0x7FFFFFFF
 
-//#define INTMAX_MAX 
+#define INTMAX_MAX 0x7FFFFFFFFFFFFFFF
 
 //Unsigned
 //Minimum
@@ -110,27 +108,43 @@ typedef unsigned int* uintptr_t;
 #define UINTMAX_MIN 0
 
 //Maximum
-#define UINT8_MAX 255
-//#define UINT16_MAX 
-//#define UINT32_MAX 
-//#define UINT64_MAX 
+#define UINT8_MAX 0xFF
+#define UINT16_MAX 0xFFFF
+#define UINT32_MAX 0xFFFFFFFF
+#define UINT64_MAX 0xFFFFFFFFFFFFFFFF
 
-//#define UINT_FAST8_MAX
-//#define UINT_FAST16_MAX 
-//#define UINT_FAST32_MAX 
-//#define UINT_FAST64_MAX 
+#define UINT_FAST8_MAX 0xFFFFFFFF//TODO ensure int actually is the fastest
+#define UINT_FAST16_MAX 0xFFFFFFFF//TODO ensure int actually is the fastest
+#define UINT_FAST32_MAX 0xFFFFFFFF
+#define UINT_FAST64_MAX 0xFFFFFFFFFFFFFFFF
 
-#define UINT_LEAST8_MAX 255
-//#define UINT_LEAST16_MAX 
-//#define UINT_LEAST32_MAX 
-//#define UINT_LEAST64_MAX 
+#define UINT_LEAST8_MAX 0xFF
+#define UINT_LEAST16_MAX 0xFFFF
+#define UINT_LEAST32_MAX 0xFFFFFFFF
+#define UINT_LEAST64_MAX 0xFFFFFFFFFFFFFFFF
 
-//#define INTPTR_MAX 
+#define INTPTR_MAX 0xFFFFFFFF
 
-//#define INTMAX_MAX 
+#define INTMAX_MAX 0xFFFFFFFFFFFFFFFF
 
 /* Function Macros For Constants */
 
-//TODO
+//TODO figure out suffixes for regular ints and smaller types
+
+//Signed
+//#define INT8_C(constant)
+//#define INT16_C(constant)
+//#define INT32_C(constant)
+#define INT64_C(constant) constantLL
+
+#define INTMAX_C(constant) constantLL
+
+//Unsigned
+//#define UINT8_C(constant)
+//#define UINT16_C(constant)
+#define UINT32_C(constant) constantU
+#define UINT64_C(constant) constantULL
+
+#define UINTMAX_C(constant) constantULL
 
 #endif
