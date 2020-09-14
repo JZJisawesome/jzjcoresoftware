@@ -28,7 +28,12 @@ void free(void* ptr);//TODO
 #define EXIT_FAILURE 1
 
 /* String Functions */
-//TODO include needed headers for size_t, errno_t and wchar_t
+//TODO include needed headers for size_t and errno_t
+
+//Null Terminated Wide String Typedef And Macros
+typedef signed int wchar_t;
+#define WCHAR_MIN 0x80000000
+#define WCHAR_MAX 0x7FFFFFFF
 
 //Null Terminated String Parsing
 //TODO implement
@@ -49,17 +54,12 @@ long double strtold(const char* restrict str, char** restrict str_end);
 //TODO implement
 //int mblen(const char* s, size_t n);
 //int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);
-//int wctomb(char* s, wchar_t wc);
+int wctomb(char* s, wchar_t wc);
 //errno_t wctomb_s(int* restrict status, char* restrict s, rsize_t ssz, wchar_t wc);
 //size_t mbstowcs(wchar_t* restrict dst, const char* restrict src, size_t len);
 //errno_t mbstowcs_s(size_t* restrict retval, wchar_t* restrict dst, rsize_t dstsz, const char* restrict src, rsize_t len);
 //size_t wcstombs(char* dst, const wchar_t* src, size_t len);
 //errno_t wcstombs_s(size_t* restrict retval, char* restrict dst, rsize_t dstsz, const wchar_t* restrict src, rsize_t len);
-
-//Null Terminated Wide String Typedef And Macros
-typedef signed int wchar_t;
-#define WCHAR_MIN 0x80000000
-#define WCHAR_MAX 0x7FFFFFFF
 
 /* Pseudo-Random Number Generation */
 int rand();//TODO
