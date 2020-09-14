@@ -1,19 +1,20 @@
 #ifndef STDLIB_H
 #define STDLIB_H
 
-//TODO there are still lots left to implement here
+//TODO there are still lots left to implement here (cppreference is not supper organized on a per header basis)
 
 //Dynamic Memory Management
+//TODO include needed headers for size_t
 //TODO test if these actually work and make them work
-#define malloc __builtin_malloc
-#define calloc __builtin_calloc
-#define realloc __builtin_realloc
-#define free __builtin_free
-//#define aligned_alloc //TODO
+//void* malloc(size_t size);//TODO
+//void* calloc(size_t num, size_t size);//TODO
+//void* realloc(void* ptr, size_t new_size);//TODO
+void free(void* ptr);//TODO
+//void* aligned_alloc(size_t alignment, size_t size);//TODO
 
 /* Program Utilities*/
 //Program Termination
-//TODO these might have to be functions rather than macros; check if that is the case
+//TODO these have to be functions rather than macros; fix that
 #define abort() (__asm__ __volatile__("ecall"))//For JZJCore, the ecall and ebreak instructions halt the cpu//TODO handle SIGABRT signal handler
 //#define exit//TODO will need to shut things down cleanly
 //#define quick_exit//TODO will need to shut things down cleanly
@@ -64,5 +65,36 @@ typedef signed int wchar_t;
 int rand();//TODO
 void srand(unsigned seed);//TODO
 #define RAND_MAX 0x7FFFFFFF
+
+/* Math Stuff */
+
+//Absolute functions
+int abs(int n);//TODO
+long labs(long n);//TODO
+long long llabs(long long n);//TODO
+
+//Division structs
+typedef struct
+{
+    int quot;
+    int rem;
+} div_t;
+
+typedef struct
+{
+    long quot;
+    long rem;
+} ldiv_t;
+
+typedef struct
+{
+    long long quot;
+    long long rem;
+} lldiv_t;
+
+//Division functions
+div_t div(int x, int y);//TODO
+ldiv_t ldiv(long x, long y);//TODO
+lldiv_t lldiv(long long x, long long y);//TODO
 
 #endif

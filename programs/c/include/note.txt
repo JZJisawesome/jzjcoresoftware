@@ -1,0 +1,2 @@
+Lots of info on the standard library headers comes directly from cppreference
+As usual, everything in this folder is MIT licensed
