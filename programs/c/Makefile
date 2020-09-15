@@ -9,6 +9,8 @@
 CC = riscv64-unknown-elf-gcc
 CFLAGS = -std=c18 -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -fbuiltin -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os
 
+LDFLAGS = $(CFLAGS) -T $(LINKERSCRIPT) -L $(BUILDDIR) -Wl,--start-group -ljzjcore -ljzjcorec -Wl,--end-group
+
 INC = -I ./include/
 
 BUILDDIR = ./build/
@@ -27,7 +29,7 @@ libjzjcorec: $(BUILDDIR)/libjzjcorec.a
 #Eg. "make program PROGRAM=clibtest" will output ./build/programs/clibtest and ./build/programs/clibtest.hex
 program: $(LINKERSCRIPT) $(BUILDDIR)/programs env
 	$(CC) $(CFLAGS) $(INC) -c $(PROGRAMSDIR)/$(PROGRAM).c -o $(BUILDDIR)/programs/$(PROGRAM).o
-	$(CC) $(CFLAGS) -T $(LINKERSCRIPT) -o $(BUILDDIR)/programs/$(PROGRAM) $(BUILDDIR)/crt0.o $(BUILDDIR)/libjzjcore.a $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/programs/$(PROGRAM).o
+	$(CC) -o $(BUILDDIR)/programs/$(PROGRAM) $(BUILDDIR)/crt0.o $(BUILDDIR)/programs/$(PROGRAM).o $(LDFLAGS) 
 	$(HEXSCRIPT) $(BUILDDIR)/programs/$(PROGRAM)
 
 #JZJCore custom library
@@ -38,7 +40,7 @@ $(BUILDDIR)/libjzjcore.a: $(BUILDDIR)/libjzjcore $(SRCDIR)/libjzjcore/JZJCoreLib
 
 #C library
 #TODO more will need to be added here as the library expands
-$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec
+$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec $(SRCDIR)/libjzjcorec/stdlib.S
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/stdlib.S -o $(BUILDDIR)/libjzjcorec/stdlib.o
 	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/stdlib.o
 
