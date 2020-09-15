@@ -8,7 +8,7 @@
 #Note: $1 contains the 1st command line argument (the file to convert)
 
 #Convert elf to verilog hex (but addresses are incorrect)
-riscv64-unknown-elf-objcopy $1 -O verilog --verilog-data-width=4
+riscv64-unknown-elf-objcopy -O verilog --verilog-data-width=4 $1 /tmp/convertelf.tmp
 
 echo "//Processed Verilog Hex File For JZJCore" > "$1.hex"
 
@@ -33,4 +33,7 @@ do
         #Pass through the line as is (contains data, a comment, or whitespace; not an address)
         echo "$line" >> "$1.hex"
     fi
-done < "$1"
+done < "/tmp/convertelf.tmp"
+
+#TODO allow running multiple convertelf.sh instances at once by changing the name of convertelf.tmp
+rm /tmp/convertelf.tmp
