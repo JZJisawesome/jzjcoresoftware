@@ -10,8 +10,20 @@
 
 .global div
 div:#int x, int y
-    #__divsi3
+    #TODO
+
+    /*
     addi sp, sp, -8
     sw s0, 0(sp)
     sw s1, 4(sp)
+    
+    mv s0, a0
+    mv s1, a1
+    
+    
+    lw s0, 0(sp)
+    lw s1, 4(sp)
+    addi sp, sp, 8
+    */
+    #jal __divsi3
     ret

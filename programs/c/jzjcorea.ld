@@ -18,7 +18,6 @@ MEMORY
 /* the arch is rv32 */
 OUTPUT_ARCH("riscv")
 OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv", "elf32-littleriscv")
-GROUP(libgcc.a)
 /* After being output, convertelf.sh can produce a verilog hex file */
 
 /* _start is defined in crt0.s */
