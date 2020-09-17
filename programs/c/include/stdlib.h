@@ -3,16 +3,20 @@
 
 //TODO there are still lots left to implement here (cppreference is not supper organized on a per header basis)
 
-//Dynamic Memory Management
-//TODO include needed headers for size_t
-//TODO test if these actually work and make them work
-//void* malloc(size_t size);//TODO
-//void* calloc(size_t num, size_t size);//TODO
-//void* realloc(void* ptr, size_t new_size);//TODO
-void free(void* ptr);//TODO
-//void* aligned_alloc(size_t alignment, size_t size);//TODO
+//Type definitions also in other headers
+typedef unsigned int size_t;//TODO ensure this is right
+typedef int errno_t;
+typedef size_t rsize_t;
 
-/* Program Utilities*/
+//Dynamic Memory Management
+//TODO implement these (will be very difficult)
+void* malloc(size_t size);//TODO
+void* calloc(size_t num, size_t size);//TODO
+void* realloc(void* ptr, size_t new_size);//TODO
+void free(void* ptr);//TODO
+void* aligned_alloc(size_t alignment, size_t size);//TODO
+
+/* Program Utilities */
 //Program Termination
 _Noreturn void abort(void);
 _Noreturn void exit(int exit_code);//TODO will need to shut things down cleanly
@@ -27,7 +31,6 @@ int at_quick_exit(void (*func)(void));//TODO
 #define EXIT_FAILURE 1
 
 /* String Functions */
-//TODO include needed headers for size_t and errno_t
 
 //Null Terminated Wide String Typedef And Macros
 typedef signed int wchar_t;
@@ -51,14 +54,14 @@ long double strtold(const char* restrict str, char** restrict str_end);
 //Null Terminated Multibyte String Functions
 
 //TODO implement
-//int mblen(const char* s, size_t n);
-//int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);
-int wctomb(char* s, wchar_t wc);
-//errno_t wctomb_s(int* restrict status, char* restrict s, rsize_t ssz, wchar_t wc);
-//size_t mbstowcs(wchar_t* restrict dst, const char* restrict src, size_t len);
-//errno_t mbstowcs_s(size_t* restrict retval, wchar_t* restrict dst, rsize_t dstsz, const char* restrict src, rsize_t len);
-//size_t wcstombs(char* dst, const wchar_t* src, size_t len);
-//errno_t wcstombs_s(size_t* restrict retval, char* restrict dst, rsize_t dstsz, const wchar_t* restrict src, rsize_t len);
+int mblen(const char* s, size_t n);//TODO
+int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);//TODO
+int wctomb(char* s, wchar_t wc);//TODO
+errno_t wctomb_s(int* restrict status, char* restrict s, rsize_t ssz, wchar_t wc);//TODO
+size_t mbstowcs(wchar_t* restrict dst, const char* restrict src, size_t len);//TODO
+errno_t mbstowcs_s(size_t* restrict retval, wchar_t* restrict dst, rsize_t dstsz, const char* restrict src, rsize_t len);//TODO
+size_t wcstombs(char* dst, const wchar_t* src, size_t len);//TODO
+errno_t wcstombs_s(size_t* restrict retval, char* restrict dst, rsize_t dstsz, const wchar_t* restrict src, rsize_t len);//TODO
 
 /* Pseudo-Random Number Generation */
 int rand();//TODO

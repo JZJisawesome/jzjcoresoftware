@@ -22,7 +22,7 @@ _Exit:#int
 .global labs
 abs:#int n
 labs:#long n
-    blez a0, 1f#Only negate if n < 0
+    bgez a0, 1f#Only negate if n < 0
     neg a0, a0#Negate n since it is < 0
 1:
     ret#int/long (abs/labs)
