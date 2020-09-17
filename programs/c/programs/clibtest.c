@@ -38,17 +38,18 @@ void main()
     PORT5 = isgraph('a');//true
     PORT5 = isprint(' ');//true
     PORT5 = isprint(127);//false
+    PORT5 = 0x12345678;//Indicator of next section in GTKWave
     PORT5 = iscntrl('a');//false
     PORT5 = iscntrl(127);//true
     PORT5 = iscntrl(31);// true
     PORT5 = iscntrl(' ');//false
-    PORT5 = 0x12345678;//Indicator of next section in GTKWave
     PORT5 = isalpha('j');//true
     PORT5 = isalpha('J');//true
     PORT5 = isalpha('7');//false
     PORT5 = isblank(' ');//true
     PORT5 = isblank('\t');//true
     PORT5 = isblank('\n');//false
+    PORT5 = 0x12345678;//Indicator of next section in GTKWave
     PORT5 = isspace(' ');//true
     PORT5 = isspace('\t');//true
     PORT5 = isspace('\n');//true
@@ -56,6 +57,14 @@ void main()
     PORT5 = isalnum('J');//true
     PORT5 = isalnum('7');//true
     PORT5 = isalnum('\t');//false
+    PORT5 = 0x12345678;//Indicator of next section in GTKWave
+    PORT5 = isxdigit('f');//true
+    PORT5 = isxdigit('G');//false
+    PORT5 = ispunct('\'');//true
+    PORT5 = ispunct(')');//true
+    PORT5 = ispunct(' ');//false
+    
+    PORT5 = 0x12345678;//Indicator of next section in GTKWave
     
     //TODO test isxdigit ispunct
 
