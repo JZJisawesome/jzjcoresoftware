@@ -26,6 +26,16 @@ void main()
     PORT5 = tolower(character);
     character = '!';
     PORT5 = tolower(character);
+    PORT5 = islower('z');
+    PORT5 = islower('{');
+    PORT5 = isupper('J');
+    PORT5 = isupper('j');
+    PORT5 = isprint(' ');
+    PORT5 = isprint(127);
+    PORT5 = iscntrl('a');
+    PORT5 = iscntrl(127);
+    PORT5 = iscntrl(31);
+    PORT5 = iscntrl(' ');
 
     assert(PORT0 == 0);
     assert(errno == 0);

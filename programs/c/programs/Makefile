@@ -23,7 +23,7 @@ STATICLIBSDIR = $(BUILDDIR)
 .PHONY: program
 program: $(BUILDDIR)/programs/$(PROGRAM).hex
 
-$(BUILDDIR)/programs/$(PROGRAM).hex: $(LINKERSCRIPT) $(PROGRAMSDIR)/$(PROGRAM).c | $(BUILDDIR)/programs
+$(BUILDDIR)/programs/$(PROGRAM).hex: $(PROGRAMSDIR)/$(PROGRAM).c $(LINKERSCRIPT) $(BUILDDIR)/crt0.o $(BUILDDIR)/libjzjcore.a $(BUILDDIR)/libjzjcorec.a | $(BUILDDIR)/programs
 	$(CC) $(CFLAGS) $(INC) -c $(PROGRAMSDIR)/$(PROGRAM).c -o $(BUILDDIR)/programs/$(PROGRAM).o
 	$(CC) $(LDFLAGS) -o $(BUILDDIR)/programs/$(PROGRAM) $(BUILDDIR)/crt0.o $(BUILDDIR)/programs/$(PROGRAM).o $(LDLIBS)
 	$(HEXSCRIPT) $(BUILDDIR)/programs/$(PROGRAM)
