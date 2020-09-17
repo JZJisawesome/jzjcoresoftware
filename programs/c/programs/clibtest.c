@@ -56,6 +56,8 @@ void main()
     PORT5 = isalnum('J');//true
     PORT5 = isalnum('7');//true
     PORT5 = isalnum('\t');//false
+    
+    //TODO test isxdigit ispunct
 
     assert(PORT0 == 0);
     assert(errno == 0);

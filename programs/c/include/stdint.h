@@ -129,33 +129,32 @@ typedef unsigned int* uintptr_t;
 
 /* Function Macros For Constants */
 
-//TODO figure out suffixes for regular ints and smaller types
+//Useful for figuring out I can just cast: https://www.nongnu.org/avr-libc/user-manual/group__avr__stdint.html
 
 //Signed
-//#define INT8_C(constant)
-//#define INT16_C(constant)
-//#define INT32_C(constant)
-#define INT64_C(constant) constantLL
+#define INT8_C(constant) (int_least8_t)(constant)
+#define INT16_C(constant) (int_least16_t)(constant)
+#define INT32_C(constant) (int_least32_t)(constant)
+#define INT64_C(constant) (int_least64_t)(constant)
 
-#define INTMAX_C(constant) constantLL
+#define INTMAX_C(constant) (intmax_t)(constant)
 
 //Unsigned
-//#define UINT8_C(constant)
-//#define UINT16_C(constant)
-#define UINT32_C(constant) constantU
-#define UINT64_C(constant) constantULL
+#define UINT8_C(constant) (uint_least8_t)(constant)
+#define UINT16_C(constant) (uint_least16_t)(constant)
+#define UINT32_C(constant) (uint_least32_t)(constant)
+#define UINT64_C(constant) (uint_least64_t)(constant)
 
-#define UINTMAX_C(constant) constantULL
+#define UINTMAX_C(constant) (uintmax_t)(constant)
 
 /* Other Numeric Limits */
 
-//TODO
-//#define PTRDIFF_MIN
-//#define PTRDIFF_MAX
-//#define SIZE_MAX
-//#define SIG_ATOMIC_MIN
-//#define SIG_ATOMIC_MAX
-//#define WINT_MIN
-//#define WINT_MAX
+#define PTRDIFF_MIN 0x80000000
+#define PTRDIFF_MAX 0x7FFFFFFF
+#define SIZE_MAX 0xFFFFFFFF
+//#define SIG_ATOMIC_MIN//TODO
+//#define SIG_ATOMIC_MAX//TODO
+#define WINT_MIN 0x00000000
+#define WINT_MAX 0xFFFFFFFF
 
 #endif

@@ -5,10 +5,6 @@
 
 //complex.h
 //TODO
-//ctype.h
-//TODO
-//errno.h
-//TODO
 //fenv.h
 //TODO
 //float.h
@@ -21,8 +17,6 @@
 //TODO
 //locale.h
 //TODO
-//math.h
-//TODO
 //setjmp.h
 //TODO
 //stdalign.h
@@ -31,11 +25,7 @@
 //TODO
 //stdatomic.h
 //TODO
-//stdint.h
-//TODO
 //stdio.h
-//TODO
-//stdnoreturn.h
 //TODO
 //string.h
 //TODO

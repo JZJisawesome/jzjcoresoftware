@@ -33,9 +33,9 @@ int at_quick_exit(void (*func)(void));//TODO
 /* String Functions */
 
 //Null Terminated Wide String Typedef And Macros
-typedef signed int wchar_t;
-#define WCHAR_MIN 0x80000000
-#define WCHAR_MAX 0x7FFFFFFF
+typedef unsigned short wchar_t;
+#define WCHAR_MIN 0x0000
+#define WCHAR_MAX 0xFFFF
 
 //Null Terminated String Parsing
 //TODO implement
@@ -71,8 +71,8 @@ void srand(unsigned seed);//TODO
 /* Math Stuff */
 
 //Absolute functions
-int abs(int n);//TODO
-long labs(long n);//TODO
+int abs(int n);
+long labs(long n);
 long long llabs(long long n);//TODO
 
 //Division structs

@@ -8,5 +8,6 @@ typedef signed int* ptrdiff_t;
 typedef long double max_align_t;//TODO ensure this is right
 //#define offsetof//TODO
 typedef int errno_t;
+typedef unsigned short wchar_t;
 
 #endif
