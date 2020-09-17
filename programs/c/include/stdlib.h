@@ -14,13 +14,12 @@ void free(void* ptr);//TODO
 
 /* Program Utilities*/
 //Program Termination
-//TODO these have to be functions rather than macros; fix that
-#define abort() (__asm__ __volatile__("ecall"))//For JZJCore, the ecall and ebreak instructions halt the cpu//TODO handle SIGABRT signal handler
-//#define exit//TODO will need to shut things down cleanly
-//#define quick_exit//TODO will need to shut things down cleanly
-#define _Exit(exit_code) (__asm__ __volatile__("ecall"))//For JZJCore, the ecall and ebreak instructions halt the cpu
-//#define atexit//TODO
-//#define at_quick_exit//TODO
+_Noreturn void abort(void);
+_Noreturn void exit(int exit_code);//TODO will need to shut things down cleanly
+_Noreturn void quick_exit(int exit_code);//TODO will need to shut things down cleanly
+_Noreturn void _Exit(int exit_code);
+int atexit(void (*func)(void));//TODO
+int at_quick_exit(void (*func)(void));//TODO
 
 //Environment Communication
 //The values of these don't matter because this is a bare metal environment

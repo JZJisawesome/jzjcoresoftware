@@ -1,3 +1,34 @@
+/* New Instructions */
+
+//In the c folder, run the following command, substituting in "aprogram" for a file in the programs directory without the .c extension
+//The result will be placed in build/programs/aprogram.hex
+make program PROGRAM=aprogram
+
+
+
+/* Debugging with qemu-system-riscv32 and riscv64-unknown-elf-gdb */
+//TODO finish
+
+//Repeat this for each .c file
+riscv64-unknown-elf-gcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ggdb -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -c -mstrict-align -I ./include file.c
+
+//Do this for crt0.s
+riscv64-unknown-elf-gcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ggdb -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -c -mstrict-align crt0.s -o crt0.o
+
+//If your application needs it, do this for jzjcorelib
+//Note: To use gcc arithmetic functions including the header file is not needed, but for other JZJCoreLIB functions it is
+riscv64-unknown-elf-gcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ggdb -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align JZJCoreLib.S -o JZJCoreLib.o
+
+//Link everything together using jzjcorea.ld
+riscv64-unknown-elf-ld --gc-sections -T jzjcorea.ld -o a.out crt0.o JZJCoreLib.o file.o
+
+//todo instruction to start application
+//qemu-system-riscv32 --machine none --cpu rv32 -S --drive file=a.out,format=raw --nographic --serial /dev/null
+
+
+
+/* Old instructions */
+
 //Repeat this for each .c file
 riscv64-unknown-elf-gcc -std=c18 -static-libgcc -lgcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ffreestanding -fbuiltin -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -mstrict-align -Os -I ./include -c file.c -o file.o
 
@@ -20,24 +51,3 @@ riscv64-unknown-elf-gcc -std=c18 -T jzjcorea.ld -static-libgcc -lgcc -fdata-sect
 //Note: riscv64-unknown-elf-objcopy must be in the PATH variable
 //Note: overwrites original elf file, and produces originalfilename.hex
 ../convertelf.sh ./a.out
-
-
-
-/* Debugging with qemu-system-riscv32 and riscv64-unknown-elf-gdb */
-//TODO finish
-
-//Repeat this for each .c file
-riscv64-unknown-elf-gcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ggdb -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -c -mstrict-align -I ./include file.c
-
-//Do this for crt0.s
-riscv64-unknown-elf-gcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ggdb -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -c -mstrict-align crt0.s -o crt0.o
-
-//If your application needs it, do this for jzjcorelib
-//Note: To use gcc arithmetic functions including the header file is not needed, but for other JZJCoreLIB functions it is
-riscv64-unknown-elf-gcc -fdata-sections -ffunction-sections -Wl,--gc-sections -ggdb -ffreestanding -nostdlib -march=rv32i -mabi=ilp32 -nostartfiles -nodefaultlibs -Os -c -mstrict-align JZJCoreLib.S -o JZJCoreLib.o
-
-//Link everything together using jzjcorea.ld
-riscv64-unknown-elf-ld --gc-sections -T jzjcorea.ld -o a.out crt0.o JZJCoreLib.o file.o
-
-//todo instruction to start application
-//qemu-system-riscv32 --machine none --cpu rv32 -S --drive file=a.out,format=raw --nographic --serial /dev/null

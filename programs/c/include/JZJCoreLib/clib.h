@@ -25,8 +25,6 @@
 //TODO
 //setjmp.h
 //TODO
-//signal.h
-//TODO
 //stdalign.h
 //TODO
 //stdarg.h

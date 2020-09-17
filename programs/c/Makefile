@@ -4,11 +4,12 @@ WRAPPER_LIBSDIR = ./src
 WRAPPER_PROGRAMSDIR = ./programs
 WRAPPER_BUILDDIR = ./build
 
-.PHONY: env program
+.PHONY: env
 env:
 	$(MAKE) --directory=$(WRAPPER_LIBSDIR)
 
 #Program to compile must be specified with PROGRAM
+.PHONY: program
 program: env
 	$(MAKE) --directory=$(WRAPPER_PROGRAMSDIR) PROGRAM=$(PROGRAM)
 	

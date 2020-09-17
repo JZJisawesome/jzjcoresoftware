@@ -13,9 +13,9 @@ void main()
     
     volatile int test1 = 2, test2 = -16;
     
-    PORT5 = abs(test1);
+    PORT5 = abs(test1 * test2);
     PORT5 = abs(test2);
-    PORT5 = div(test1, test2).quot;
+    //PORT5 = div(test1, test2).quot;
 
     assert(PORT0 == 0);
     return;
