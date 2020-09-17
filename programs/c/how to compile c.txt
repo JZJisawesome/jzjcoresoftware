@@ -2,7 +2,7 @@
 
 //In the c folder, run the following command, substituting in "aprogram" for a file in the programs directory without the .c extension
 //The result will be placed in build/programs/aprogram.hex
-make program PROGRAM=aprogram
+make program PROGRAM=aprogram -j
 
 
 

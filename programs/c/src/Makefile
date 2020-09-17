@@ -19,23 +19,30 @@ SRCDIR = ./
 .PHONY: env
 env: $(BUILDDIR)/crt0.o $(BUILDDIR)/libjzjcore.a $(BUILDDIR)/libjzjcorec.a
 
-#JZJCore custom library
+##JZJCore custom library
+
 #TODO more will need to be added here as the library expands
 $(BUILDDIR)/libjzjcore.a: $(SRCDIR)/libjzjcore/JZJCoreLib.S | $(BUILDDIR)/libjzjcore
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcore/JZJCoreLib.S -o $(BUILDDIR)/libjzjcore/JZJCoreLib.o
 	ar rcs $(BUILDDIR)/libjzjcore.a $(BUILDDIR)/libjzjcore/JZJCoreLib.o
 
-#C library
-#TODO more will need to be added here as the library expands
-$(BUILDDIR)/libjzjcorec.a: $(SRCDIR)/libjzjcorec/stdlib.S | $(BUILDDIR)/libjzjcorec
-	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/stdlib.S -o $(BUILDDIR)/libjzjcorec/stdlib.o
-	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/stdlib.o
+##C library
 
-#C runtime
+#TODO more will need to be added here as the library expands
+$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/ctype.o
+	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/ctype.o
+	
+$(BUILDDIR)/libjzjcorec/stdlib.o: $(SRCDIR)/libjzjcorec/stdlib.S | $(BUILDDIR)/libjzjcorec
+	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/stdlib.S -o $(BUILDDIR)/libjzjcorec/stdlib.o
+	
+$(BUILDDIR)/libjzjcorec/ctype.o: $(SRCDIR)/libjzjcorec/ctype.S | $(BUILDDIR)/libjzjcorec
+	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/ctype.S -o $(BUILDDIR)/libjzjcorec/ctype.o
+
+##C runtime
 $(BUILDDIR)/crt0.o: $(SRCDIR)/crt0.s | $(BUILDDIR)
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/crt0.s -o $(BUILDDIR)/crt0.o
 
-#Build Directory Creation
+##Build Directory Creation
 $(BUILDDIR)/libjzjcore:
 	mkdir -p $(BUILDDIR)/libjzjcore
 	
