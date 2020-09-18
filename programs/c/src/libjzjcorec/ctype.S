@@ -4,13 +4,14 @@
 .text
 
 /* Character Classification */
-#To avoid wasting time loading immediates for branches, these functions subtract their input
+#To avoid wasting time loading immediates for branches, many of these functions subtract their input
 #to make the desired characters fall into a range between 0 and something
 #They then use unsigned set if less than immediate to determine if a character falls into that range
-#Should there be multiple ranges to check, the result of each is stored into temporary registers and
-#or'ed at the end
+#This is only for functions with a contiguous set of variables that will make it return true. Other functions use different methods
 
 #The table at https://en.cppreference.com/w/c/string/byte and the one at http://www.asciitable.com/ helped significantly
+
+#TODO I just realized that the functions with multiple groups can exit early if a group returns true. Implement that in a fair way
 
 .global isalnum#TODO make faster
 isalnum:#int ch

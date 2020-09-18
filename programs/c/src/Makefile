@@ -29,12 +29,15 @@ $(BUILDDIR)/libjzjcore.a: $(SRCDIR)/libjzjcore/JZJCoreLib.S | $(BUILDDIR)/libjzj
 ##C library
 
 #TODO more will need to be added here as the library expands
-$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/ctype.o
-	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/ctype.o
-	
+$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/random.o $(BUILDDIR)/libjzjcorec/ctype.o
+	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/random.o $(BUILDDIR)/libjzjcorec/ctype.o
+
 $(BUILDDIR)/libjzjcorec/stdlib.o: $(SRCDIR)/libjzjcorec/stdlib.S | $(BUILDDIR)/libjzjcorec
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/stdlib.S -o $(BUILDDIR)/libjzjcorec/stdlib.o
 	
+$(BUILDDIR)/libjzjcorec/random.o: $(SRCDIR)/libjzjcorec/random.S | $(BUILDDIR)/libjzjcorec
+	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/random.S -o $(BUILDDIR)/libjzjcorec/random.o
+
 $(BUILDDIR)/libjzjcorec/ctype.o: $(SRCDIR)/libjzjcorec/ctype.S | $(BUILDDIR)/libjzjcorec
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/ctype.S -o $(BUILDDIR)/libjzjcorec/ctype.o
 
