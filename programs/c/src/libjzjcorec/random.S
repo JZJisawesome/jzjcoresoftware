@@ -1,7 +1,55 @@
 #Random functions for stdlib.h
-#Requires linking with libgcc
+#Thank you https://en.wikipedia.org/wiki/Xorshift
+
+#Same values as the wikipedia c implementation for 32 bit random
+.equ RAND_SHIFT_VAL_1, 13
+.equ RAND_SHIFT_VAL_2, 17
+.equ RAND_SHIFT_VAL_3, 5
+
+#Initial seed value (must be nonzero)
+.equ INITIAL_SEED, 0x1234abcd
+
+.global rand
+rand:
+    #Load the current seed
+    lw a0, __randomseed
+    
+    #1st xor and shift
+    slli t0, a0, RAND_SHIFT_VAL_1
+    xor a0, a0, t0
+    
+    #2nd xor and shift
+    srli t1, a0, RAND_SHIFT_VAL_2
+    xor a0, a0, t1
+    
+    #3rd xor and shift
+    srli t2, a0, RAND_SHIFT_VAL_3
+    xor a0, a0, t2
+    
+    #Save the new seed (using t3 as a scratch register)
+    sw a0, __randomseed, t3
+    
+    #Return the new seed as well
+    ret#int
+
+.global srand
+srand:#unsigned seed
+    bnez a0, 1f#Check if the seed is 0
+    li a0, INITIAL_SEED#Seed was zero, so we can't use it
+1:  #Seed was nonzero, so we can use it
+    sw a0, __randomseed, t0#Store seed into the __randomseed variable using t0 as a scratch register
+    ret
+
+#Holds the current seed
+.data
+.align 4
+__randomseed: .word INITIAL_SEED
+
+/* Old LCG Implementation */
+/*
+#Random functions for stdlib.h
+#Requires linking with libgcc and is slower, so the xorshift implementation is preferred
 #Thank you https://en.wikipedia.org/wiki/Linear_congruential_generator
-#TODO look into https://en.wikipedia.org/wiki/Xorshift
 .text
 
 #Constants for random (same values as glibc according to wikipedia)
@@ -12,7 +60,7 @@
 #Initial seed value
 .equ INITIAL_SEED, 0x1234abcd
 
-.global rand#TODO create an implementation that does not depend on libgcc (it might even make sense to put back into stdlib.S again)
+.global rand
 rand:
     #Push ra to the stack
     addi sp, sp, -4#Allocate space on the stack
@@ -50,5 +98,4 @@ srand:#unsigned seed
 .data
 .align 4
 __randomseed: .word INITIAL_SEED
-
-#TODO FIX rand() IS NOT WORKING PROPERLY
+*/

@@ -64,8 +64,8 @@ size_t wcstombs(char* dst, const wchar_t* src, size_t len);//TODO
 errno_t wcstombs_s(size_t* restrict retval, char* restrict dst, rsize_t dstsz, const wchar_t* restrict src, rsize_t len);//TODO
 
 /* Pseudo-Random Number Generation */
-int rand();//TODO
-void srand(unsigned seed);//TODO
+int rand();
+void srand(unsigned seed);
 #define RAND_MAX 0x7FFFFFFF
 
 /* Math Stuff */
