@@ -5,14 +5,14 @@
 .text
 
 #Constants for random (same values as glibc according to wikipedia)
-.equ RAND_A, 0x80000000
-.equ RAND_M, 1103414245
+.equ RAND_M, 0x80000000
+.equ RAND_A, 1103414245
 .equ RAND_C, 12345
 
 #Initial seed value
 .equ INITIAL_SEED, 0x1234abcd
 
-.global rand#TODO create an implementation that does not depend on lib (it might even make sense to put back into stdlib.S again)
+.global rand#TODO create an implementation that does not depend on libgcc (it might even make sense to put back into stdlib.S again)
 rand:
     #Push ra to the stack
     addi sp, sp, -4#Allocate space on the stack
