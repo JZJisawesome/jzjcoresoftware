@@ -15,8 +15,6 @@
 //TODO
 //limits.h
 //TODO
-//locale.h
-//TODO
 //setjmp.h
 //TODO
 //stdalign.h

@@ -8,6 +8,7 @@
 #include <stdnoreturn.h>
 #include <errno.h>
 #include <ctype.h>
+#include <string.h>
 
 int state = 1;
 
@@ -17,6 +18,7 @@ int state = 1;
 
 void randTest();
 void ctypeTest();
+void stringTest();
 
 void main()
 {
@@ -46,6 +48,9 @@ void main()
     
     PORT6 = state++;
     ctypeTest();
+    
+    PORT6 = state++;
+    stringTest();
 
     assert(PORT0 == 0);
     assert(errno == 0);
@@ -109,4 +114,18 @@ void ctypeTest()
     PORT5 = ispunct(' ');//false
     
     PORT6 = state++;
+}
+
+void stringTest()
+{
+    volatile char teststring[40] = "Original Text";
+    for (int i = 0; i < 40; ++i)
+        PORT5 = teststring[i];
+    
+    PORT6 = state++;
+    volatile char teststring2[40] = "Modified String";
+    strcpy(teststring, teststring2);//Bye bye Original Text! WHAHAHAHAAHA
+    
+    for (int i = 0; i < 40; ++i)
+        PORT5 = teststring[i];
 }

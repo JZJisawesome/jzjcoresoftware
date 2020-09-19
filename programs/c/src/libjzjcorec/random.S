@@ -34,10 +34,10 @@ rand:
 
 .global srand
 srand:#unsigned seed
-    bnez a0, 1f#Check if the seed is 0
-    li a0, INITIAL_SEED#Seed was zero, so we can't use it
-1:  #Seed was nonzero, so we can use it
+    beqz a0, 1f#Check if the seed is 0
+    #Seed was nonzero, so we can use it
     sw a0, __randomseed, t0#Store seed into the __randomseed variable using t0 as a scratch register
+1:  #We skip here if the seed was 0
     ret
 
 #Holds the current seed
