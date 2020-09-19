@@ -19,6 +19,7 @@
 //Floating point manipulation functions
 //TODO
 //Classification and comparison
+//TODO
 
 /* Macro Constants */
 

@@ -1,12 +1,9 @@
 #ifndef STDLIB_H
 #define STDLIB_H
 
-//TODO there are still lots left to implement here (cppreference is not supper organized on a per header basis)
+#include <commondefs.h>
 
-//Type definitions also in other headers
-typedef unsigned int size_t;//TODO ensure this is right
-typedef int errno_t;
-typedef size_t rsize_t;
+//TODO there are still lots left to implement here (cppreference is not supper organized on a per header basis)
 
 //Dynamic Memory Management
 //TODO implement these (will be very difficult)

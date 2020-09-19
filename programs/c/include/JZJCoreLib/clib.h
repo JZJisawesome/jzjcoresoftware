@@ -25,8 +25,6 @@
 //TODO
 //stdio.h
 //TODO
-//string.h
-//TODO
 //tgmath.h
 //TODO
 //threads.h
