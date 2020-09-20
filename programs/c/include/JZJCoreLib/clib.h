@@ -3,8 +3,6 @@
 #ifndef JZJCORELIB_GCCBUILTINS_H
 #define JZJCORELIB_GCCBUILTINS_H
 
-//complex.h
-//TODO
 //fenv.h
 //TODO
 //float.h

@@ -1,14 +1,22 @@
 #include <JZJCoreLib/io.h>
+#include <alloca.h>
 #include <assert.h>
+#include <ctype.h>
+#include <errno.h>
+#include <limits.h>
 #include <math.h>
+#include <stdalign.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <stddef.h>
 #include <stdnoreturn.h>
-#include <errno.h>
-#include <ctype.h>
 #include <string.h>
+
+
+
+#include <string.h>
+
 
 int state = 1;
 
@@ -53,6 +61,7 @@ void main()
     stringTest();
     
     //todo test abs.S functions
+    //todo test more string functions
 
     assert(PORT0 == 0);
     assert(errno == 0);

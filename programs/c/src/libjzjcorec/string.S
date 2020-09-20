@@ -1,9 +1,9 @@
-#Implements some simple string functions (not the more complicated parsing stuff) 
+#Implements simple string functions for the string.h header (not the more complicated parsing stuff) 
 .text
 
 #TODO lots left to implement
 
-/* String manipulation */
+/* String Manipulation */
 
 .global strcpy#TODO try to speed things up by using lw instruction instead
 strcpy:#char* dest, const char* src
@@ -19,8 +19,16 @@ strcpy:#char* dest, const char* src
     #dest now contains the same data as src, but we must return the original value of &dest
     mv a0, t0#Restore original location of dest to a0
     ret#char*
+    
+.global strxfrm
+strxfrm:#char* restrict dest, const char* restrict src, size_t count
+    #Because no extra locales are supported by this library, this function is super simple because
+    #strcoll is the same as strcmp. This means that we don't have to change the strings at all; we just have
+    #to return the count parameter
+    mv a0, a2#Move count to a0 to be returned
+    ret#size_t
 
-/* Character array manipulation */
+/* Character Array Manipulation */
 
 .global memset#TODO try to speed things up by using sw instruction instead
 memset:#void* dest, int ch, size_t count

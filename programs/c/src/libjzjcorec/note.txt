@@ -1,1 +1,2 @@
 JZJCore C library implementation
+C files are captilized, assembly are lowercase

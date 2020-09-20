@@ -8,20 +8,20 @@
 
 //Dynamic Memory Management
 //TODO implement these (will be very difficult)
-void* malloc(size_t size);//TODO
-void* calloc(size_t num, size_t size);//TODO
-void* realloc(void* ptr, size_t new_size);//TODO
-void free(void* ptr);//TODO
-void* aligned_alloc(size_t alignment, size_t size);//TODO
+void* malloc(size_t size);//TODO DynamicMemory.c
+void* calloc(size_t num, size_t size);//TODO DynamicMemory.c
+void* realloc(void* ptr, size_t new_size);//TODO DynamicMemory.c
+void free(void* ptr);//TODO DynamicMemory.c
+void* aligned_alloc(size_t alignment, size_t size);//TODO DynamicMemory.c
 
 /* Program Utilities */
 //Program Termination
 _Noreturn void abort(void);
-_Noreturn void exit(int exit_code);//TODO will need to shut things down cleanly
-_Noreturn void quick_exit(int exit_code);//TODO will need to shut things down cleanly
+_Noreturn void exit(int exit_code);//TODO stdlib.S; will need to shut things down cleanly
+_Noreturn void quick_exit(int exit_code);//TODO stdlib.S; will need to shut things down cleanly
 _Noreturn void _Exit(int exit_code);
-int atexit(void (*func)(void));//TODO
-int at_quick_exit(void (*func)(void));//TODO
+int atexit(void (*func)(void));//TODO stdlib.S
+int at_quick_exit(void (*func)(void));//TODO stdlib.S
 
 //Environment Communication
 //The values of these don't matter because this is a bare metal environment
@@ -31,17 +31,17 @@ int at_quick_exit(void (*func)(void));//TODO
 /* String Functions */
 
 //Null Terminated String Parsing
-double atof(const char* str);//TODO
-int atoi(const char* str);//TODO
-long atol(const char* str);//TODO
-long long atoll(const char* str);//TODO
-long strtol(const char* restrict str, char** str_end, int base);//TODO
-long long strtoll(const char* restrict str, char** restrict str_end, int base);//TODO
-unsigned long strtoul(const char* restrict str, char** restrict str_end, int base);//TODO
-unsigned long long strtoull(const char* restrict str, char** restrict str_end, int base);//TODO
-float strtof(const char* restrict str, char** restrict str_end);//TODO
-double strtod(const char* restrict str, char** restrict str_end);//TODO
-long double strtold(const char* restrict str, char** restrict str_end);//TODO
+double atof(const char* str);//TODO String.c
+int atoi(const char* str);//TODO String.c
+long atol(const char* str);//TODO String.c
+long long atoll(const char* str);//TODO String.c
+long strtol(const char* restrict str, char** str_end, int base);//TODO String.c
+long long strtoll(const char* restrict str, char** restrict str_end, int base);//TODO String.c
+unsigned long strtoul(const char* restrict str, char** restrict str_end, int base);//TODO String.c
+unsigned long long strtoull(const char* restrict str, char** restrict str_end, int base);//TODO String.c
+float strtof(const char* restrict str, char** restrict str_end);//TODO String.c
+double strtod(const char* restrict str, char** restrict str_end);//TODO String.c
+long double strtold(const char* restrict str, char** restrict str_end);//TODO String.c
 
 /* Pseudo-Random Number Generation */
 int rand();
@@ -75,8 +75,8 @@ typedef struct
 } lldiv_t;
 
 //Division functions
-div_t div(int x, int y);//TODO
-ldiv_t ldiv(long x, long y);//TODO
-lldiv_t lldiv(long long x, long long y);//TODO
+div_t div(int x, int y);//TODO math/division.S
+ldiv_t ldiv(long x, long y);//TODO math/division.S
+lldiv_t lldiv(long long x, long long y);//TODO math/division.S
 
 #endif
