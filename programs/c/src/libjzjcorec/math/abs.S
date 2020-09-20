@@ -15,6 +15,7 @@ labs:#long n
 llabs:#long long n
 .global imaxabs
 imaxabs:#intmax_t n
+    #TODO make faster: __builtin_abs using srai to speed things up; see if that can be used
     li t0, 0x10000000#Load bitmask to get the sign bit
     and t1, a1, t0#Get the sign bit from the most significant word of n and store in t1
     beqz t1, 1f#If the number is positive (sign bit was 0), there is no need to negate it

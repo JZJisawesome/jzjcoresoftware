@@ -11,8 +11,6 @@
 //TODO
 //inttypes.h
 //TODO
-//iso646.h
-//TODO
 //limits.h
 //TODO
 //setjmp.h

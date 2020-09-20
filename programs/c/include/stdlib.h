@@ -53,7 +53,7 @@ void srand(unsigned seed);
 //Absolute functions
 int abs(int n);
 long labs(long n);
-long long llabs(long long n);//TODO
+long long llabs(long long n);
 
 //Division structs
 typedef struct
