@@ -51,6 +51,8 @@ void main()
     
     PORT6 = state++;
     stringTest();
+    
+    //todo test abs.S functions
 
     assert(PORT0 == 0);
     assert(errno == 0);

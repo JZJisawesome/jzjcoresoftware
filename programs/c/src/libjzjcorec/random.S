@@ -17,11 +17,9 @@ rand:
     #1st xor and shift
     slli t0, a0, RAND_SHIFT_VAL_1
     xor a0, a0, t0
-    
     #2nd xor and shift
     srli t1, a0, RAND_SHIFT_VAL_2
     xor a0, a0, t1
-    
     #3rd xor and shift
     srli t2, a0, RAND_SHIFT_VAL_3
     xor a0, a0, t2
@@ -35,14 +33,13 @@ rand:
 .global srand
 srand:#unsigned seed
     beqz a0, 1f#Check if the seed is 0
-    #Seed was nonzero, so we can use it
-    sw a0, __randomseed, t0#Store seed into the __randomseed variable using t0 as a scratch register
-1:  #We skip here if the seed was 0
+    sw a0, __randomseed, t0#Seed was nonzero, so we store it into the __randomseed variable using t0 as a scratch register
+1:  #We skip here if the seed was 0 (keep the old value of __randomseed)
     ret
 
 #Holds the current seed
 .data
-.align 4
+.align 4#JZJCore does not support misaligned memory accesses
 __randomseed: .word INITIAL_SEED
 
 /* Old Implementation (LCG) */

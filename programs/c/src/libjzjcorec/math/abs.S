@@ -11,18 +11,19 @@ labs:#long n
 1:  #Branch here if not negating
     ret#int/long (abs/labs)
     
-#TODO implement
 .global llabs
 llabs:#long long n
 .global imaxabs
 imaxabs:#intmax_t n
     li t0, 0x10000000#Load bitmask to get the sign bit
     and t1, a1, t0#Get the sign bit from the most significant word of n and store in t1
-    beqz t1, 4f#If the number is positive (sign bit was 0), there is no need to negate it
+    beqz t1, 1f#If the number is positive (sign bit was 0), there is no need to negate it
     
     #Negate n
-    mv a0, t2#Store a copy of the original lest significant word of n in order to be able to detect overflow
-    #TODO
+    seqz t2, a0#Detect if the least significant word will overflow when negating
+    neg a0, a0#Negate the least significant word
+    not a1, a1#Invert all bits in the most significant word
+    add a1, a1, t2#If negating the lsw overflowed it, we must carry a 1 over to the msw
     
-4:  #Branch here if not negating
+1:  #Branch here if not negating
     ret#long long/intmax_t (llabs/imaxabs)
