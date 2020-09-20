@@ -18,11 +18,13 @@
 //Nearest integer floating point operations
 //TODO define and implement
 //Floating point manipulation functions
-//TODO define and implement
-//Classification and comparison
-//TODO define and implement
+//TODO there are more that should be here
+float copysignf(float x, float y);
+double copysign(double x, double y);
+long double copysignl(long double x, long double y);//TODO
 
 /* Function Macros */
+//Classification And Comparison
 
 #define fpclassify __builtin_fpclassify
 #define isfinite __builtin_isfinite

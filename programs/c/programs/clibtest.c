@@ -61,7 +61,9 @@ void main()
     stringTest();
     
     //todo test abs.S functions
+    //todo test division.S functions
     //todo test more string functions
+    //todo test functions in math.h
 
     assert(PORT0 == 0);
     assert(errno == 0);
