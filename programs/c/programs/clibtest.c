@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
+#include <float.h>
 #include <limits.h>
 #include <math.h>
 #include <stdalign.h>
@@ -12,8 +13,6 @@
 #include <stdlib.h>
 #include <stdnoreturn.h>
 #include <string.h>
-
-
 
 #include <string.h>
 
