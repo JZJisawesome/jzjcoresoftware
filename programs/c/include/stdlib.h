@@ -25,14 +25,9 @@ int at_quick_exit(void (*func)(void));//TODO
 //Environment Communication
 //The values of these don't matter because this is a bare metal environment
 #define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
+#define EXIT_FAILURE 0//Using 0 for both might allow the compiler to use x0 instead of needing a li instruction
 
 /* String Functions */
-
-//Null Terminated Wide String Typedef And Macros
-typedef unsigned short wchar_t;
-#define WCHAR_MIN 0x0000
-#define WCHAR_MAX 0xFFFF
 
 //Null Terminated String Parsing
 //TODO implement
@@ -50,7 +45,7 @@ long double strtold(const char* restrict str, char** restrict str_end);
 
 //Null Terminated Multibyte String Functions
 
-//TODO implement
+//TODO implement or decide whether unicode makes sense to spend time on
 int mblen(const char* s, size_t n);//TODO
 int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);//TODO
 int wctomb(char* s, wchar_t wc);//TODO

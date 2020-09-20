@@ -27,13 +27,7 @@
 //TODO
 //tgmath.h
 //TODO
-//threads.h
-//TODO
 //time.h
-//TODO
-//uchar.h
-//TODO
-//wctype.h
 //TODO
 
 #endif
