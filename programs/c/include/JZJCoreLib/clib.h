@@ -11,8 +11,6 @@
 //TODO
 //inttypes.h
 //TODO
-//limits.h
-//TODO
 //setjmp.h
 //TODO
 //stdalign.h

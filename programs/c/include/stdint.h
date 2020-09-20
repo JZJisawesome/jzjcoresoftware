@@ -152,7 +152,5 @@ typedef unsigned int* uintptr_t;
 #define PTRDIFF_MIN 0x80000000
 #define PTRDIFF_MAX 0x7FFFFFFF
 #define SIZE_MAX 0xFFFFFFFF
-#define WINT_MIN 0x00000000
-#define WINT_MAX 0xFFFFFFFF
 
 #endif
