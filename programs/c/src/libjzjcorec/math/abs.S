@@ -1,4 +1,4 @@
-#Integer absolute calculation routines
+#Integer absolute calculation routines for stdlib.h
 #int and long are the same for RV32, as is long long and intmax_t
 .text
 

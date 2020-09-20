@@ -3,6 +3,8 @@
 #ifndef JZJCORELIB_GCCBUILTINS_H
 #define JZJCORELIB_GCCBUILTINS_H
 
+//TODO decide if I should try for to implement complex.h
+
 //fenv.h
 //TODO
 //float.h
@@ -10,8 +12,6 @@
 //inttypes.h
 //TODO
 //setjmp.h
-//TODO
-//stdalign.h
 //TODO
 //stdarg.h
 //TODO

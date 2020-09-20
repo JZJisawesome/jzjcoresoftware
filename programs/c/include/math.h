@@ -2,27 +2,43 @@
 #define MATH_H
 
 /* Functions */
+
 //Basic Operations
-//TODO
+//TODO define and implement
 //Exponential functions
-//TODO
+//TODO define and implement
 //Power functions
-//TODO
+//TODO define and implement
 //Trigonometric functions
-//TODO
+//TODO define and implement
 //Hyperbolic functions
-//TODO
+//TODO define and implement
 //Error and gamma functions
-//TODO
+//TODO define and implement
 //Nearest integer floating point operations
-//TODO
+//TODO define and implement
 //Floating point manipulation functions
-//TODO
+//TODO define and implement
 //Classification and comparison
-//TODO
+//TODO define and implement
+
+/* Function Macros */
+
+#define fpclassify __builtin_fpclassify
+#define isfinite __builtin_isfinite
+#define isinf __builtin_isinf
+#define isnan __builtin_isnan
+#define isnormal __builtin_isnormal
+#define signbit __builtin_signbit
+#define isgreater __builtin_isgreater
+#define isgreaterequal __builtin_isgreaterequal
+#define isless __builtin_isless
+#define islessequal __builtin_islessequal
+#define islessgreater __builtin_islessgreater
+#define isunordered __builtin_isunordered
 
 /* Macro Constants */
 
-//TODO
+//TODO define and implement
 
 #endif
