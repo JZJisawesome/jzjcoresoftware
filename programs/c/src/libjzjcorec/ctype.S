@@ -1,20 +1,21 @@
-#Function implementations for the c header ctype.h
+#Function implementations for the c header ctype.h (RV32I assembly)
 #MIT licensed
-
 .text
 
 /* Character Classification */
 #To avoid wasting time loading immediates for branches, many of these functions subtract their input
 #to make the desired characters fall into a range between 0 and something
-#They then use unsigned set if less than immediate to determine if a character falls into that range
-#This is only for functions with a contiguous set of variables that will make it return true. Other functions use different methods
+#This makes it easy to use sltiu if a character falls into that range
+#This is only for functions with a contiguous set of ascii characters that return true
+#Other functions use different methods to determine their result that are faster
 
 #The table at https://en.cppreference.com/w/c/string/byte and the one at http://www.asciitable.com/ helped significantly
 
 #TODO I just realized that the functions with multiple groups can exit early if a group returns true. Implement that in a fair way
 
-.global isalnum#TODO make faster
+.global isalnum
 isalnum:#int ch
+    #TODO make faster (shouldn't use same strategy as functions with only 1 contigious group)
     addi a0, a0, -48#Move digits to range between 0 and 9
     sltiu t0, a0, 10#Set t0 if ch was a digit
     addi a0, a0, -17#Now move uppercase letters to range between 0 and 25
@@ -26,8 +27,9 @@ isalnum:#int ch
     or a0, a0, t2#Set a0 if ch was a digit, uppercase letter, or lowercase letter
     ret#int
 
-.global isalpha#TODO make faster
+.global isalpha
 isalpha:#int ch
+    #TODO make faster (shouldn't use same strategy as functions with only 1 contigious group)
     addi a0, a0, -65#Move uppercase letters to range between 0 and 25
     sltiu t0, a0, 26#Set t0 if ch was an uppercase letter
     addi a0, a0, -32#Now move lowercase letters to range between 0 and 25
@@ -54,8 +56,9 @@ isdigit:#int ch
     sltiu a0, a0, 10#Set a0 if ch was a digit
     ret#int
     
-.global isxdigit#TODO make faster
+.global isxdigit
 isxdigit:#int ch
+    #TODO make faster (shouldn't use same strategy as functions with only 1 contigious group)
     addi a0, a0, -48#Move digits to range between 0 and 9
     sltiu t0, a0, 10#Set t0 if ch was a digit
     addi a0, a0, -17#Now move uppercase hex digits to range between 0 and 5
@@ -71,7 +74,7 @@ isxdigit:#int ch
 #In 7 bit ASCII, DEL is right next to NUL if it overflowed
 #Because RV32 registers are 32 bits, it uses andi to only preserve the low 7 bits, emulating 7 bit overflow
 #This saves 2 instructions (another subtraction, slt, and a final or would be needed in place of the andi)
-.global iscntrl#TODO make faster
+.global iscntrl
 iscntrl:#int ch
     addi a0, a0, 1#Move control characters to range between 0 and 32 (overflows DEL which becomes 0)
     andi a0, a0, 0x0000007F#Zero out high 25 bits (overflow as if this was a 7 bit register)
@@ -84,8 +87,9 @@ isgraph:#int ch
     sltiu a0, a0, 94#Set a0 if ch was a graphical character
     ret#int
 
-.global isspace#TODO make faster
+.global isspace
 isspace:#int ch
+    #TODO make faster (shouldn't use same strategy as functions with only 1 contigious group)
     addi a0, a0, -9#Move whitespace characters other than ' ' to range between 0 and 4
     sltiu t0, a0, 5#Set t0 if ch was a whitespace characters other than ' '
     addi a0, a0, -23#Now move ' ' to value 0
@@ -94,8 +98,9 @@ isspace:#int ch
     or a0, t0, t1#Set a0 if ch was '\t' or ' '
     ret#int
 
-.global isblank#TODO make faster
+.global isblank
 isblank:#int ch
+    #TODO make faster (shouldn't use same strategy as functions with only 1 contigious group)
     addi a0, a0, -9#Move '\t' to value 0
     seqz t0, a0#Set t0 if ch was '\t'
     addi a0, a0, -23#Now move ' ' to value 0
@@ -110,8 +115,9 @@ isprint:#int ch
     sltiu a0, a0, 95#Set a0 if ch was a printable character
     ret#int
     
-.global ispunct#TODO make faster
+.global ispunct
 ispunct:#int ch
+    #TODO make faster (shouldn't use same strategy as functions with only 1 contigious group)
     addi a0, a0, -33#Move first group of punctuation characters to range between 0 and 14
     sltiu t0, a0, 15#Set t0 if ch was in the first group of punctuation characters
     addi a0, a0, -25#Move second group of punctuation characters to range between 0 and 6
@@ -128,8 +134,9 @@ ispunct:#int ch
     
 /* Character Manipulation */
 
-.global tolower#TODO make faster
+.global tolower
 tolower:#int ch
+    #TODO make faster
     #Only modify character if it is an uppercase letter
     addi t0, a0, -65#Move uppercase letters to range between 0 and 25 and store in t0
     li t1, 25
@@ -140,8 +147,9 @@ tolower:#int ch
 1:
     ret#int
     
-.global toupper#TODO make faster
+.global toupper
 toupper:#int ch
+    #TODO make faster
     #Only modify character if it is a lowercase letter
     addi t0, a0, -97#Move lowercase letters to range between 0 and 25 and store in t0
     li t1, 25

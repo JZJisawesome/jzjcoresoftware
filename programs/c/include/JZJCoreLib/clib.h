@@ -33,8 +33,6 @@
 //TODO
 //uchar.h
 //TODO
-//wchar.h
-//TODO
 //wctype.h
 //TODO
 
