@@ -23,9 +23,9 @@ int state = 1;
 //Output is PORT5
 //So I know where things are, current stage is PORT6
 
-void randTest();
-void ctypeTest();
-void stringTest();
+static void randTest();
+static void ctypeTest();
+static void stringTest();
 
 void main()
 {
@@ -59,23 +59,26 @@ void main()
     PORT6 = state++;
     stringTest();
     
+    PORT6 = state++;
+    PORT5 = atoi("123");
+    
     //todo test abs.S functions
     //todo test division.S functions
     //todo test more string functions
-    //todo test functions in math.h
+    //todo test functions in math.h/floating.S
 
     assert(PORT0 == 0);
     assert(errno == 0);
     return;
 }
 
-void randTest()
+static void randTest()
 {
     for (int i = 0; i < 10; ++i)
         PORT5 = rand();
 }
 
-void ctypeTest()
+static void ctypeTest()
 {
     //ctype.h
     volatile char character = 'j';
@@ -128,7 +131,7 @@ void ctypeTest()
     PORT6 = state++;
 }
 
-void stringTest()
+static void stringTest()
 {
     volatile char teststring[40] = "Original Text";
     for (int i = 0; i < 40; ++i)

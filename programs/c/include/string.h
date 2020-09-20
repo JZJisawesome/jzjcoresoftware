@@ -13,7 +13,7 @@ size_t strxfrm(char* restrict dest, const char* restrict src, size_t count);
 size_t strlen(const char* str);//TODO string.S
 int strcmp(const char* lhs, const char* rhs);//TODO String.c
 int strncmp(const char* lhs, const char* rhs, size_t count);//TODO String.c
-int strcoll(const char* lhs, const char* rhs);//TODO String.c (same as strcmp)
+int strcoll(const char* lhs, const char* rhs);//TODO String.c (same implementation as strcmp probably)
 char* strchr(const char* str, int ch);//TODO string.S
 char* strrchr(const char* str, int ch);//TODO string.S
 size_t strspn(const char* dest, const char *src);//TODO String.c

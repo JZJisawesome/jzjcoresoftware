@@ -1,8 +1,6 @@
 #Simple software floating point routines for the math.h c header
 .text
 
-#TODO ensure the implementation of ilogbf and ilogb are correct (it's not, we need to subtract the encoded exponent from 127 or 2^11 - 1 for float/double)
-
 .global ilogbf
 ilogbf:#float arg
     #The exponent is bits 30:23 of arg
