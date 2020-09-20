@@ -1,7 +1,7 @@
 #Random functions for stdlib.h
 #Thank you https://en.wikipedia.org/wiki/Xorshift
 
-#Same values as the wikipedia c implementation for 32 bit random
+#Same values as the wikipedia c implementation for 32 bit random xorshift
 .equ RAND_SHIFT_VAL_1, 13
 .equ RAND_SHIFT_VAL_2, 17
 .equ RAND_SHIFT_VAL_3, 5
@@ -45,7 +45,7 @@ srand:#unsigned seed
 .align 4
 __randomseed: .word INITIAL_SEED
 
-/* Old LCG Implementation */
+/* Old Implementation (LCG) */
 /*
 #Random functions for stdlib.h
 #Requires linking with libgcc and is slower, so the xorshift implementation is preferred

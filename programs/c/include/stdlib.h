@@ -4,6 +4,7 @@
 #include <commondefs.h>
 
 //TODO there are still lots left to implement here (cppreference is not supper organized on a per header basis)
+//Note: I will not be implementing unicode/wide character strings
 
 //Dynamic Memory Management
 //TODO implement these (will be very difficult)
@@ -30,30 +31,17 @@ int at_quick_exit(void (*func)(void));//TODO
 /* String Functions */
 
 //Null Terminated String Parsing
-//TODO implement
-double atof(const char* str);
-int atoi(const char* str);
-long atol(const char* str);
-long long atoll(const char* str);
-long strtol(const char* restrict str, char** str_end, int base);
-long long strtoll(const char* restrict str, char** restrict str_end, int base);
-unsigned long strtoul(const char* restrict str, char** restrict str_end, int base);
-unsigned long long strtoull(const char* restrict str, char** restrict str_end, int base);
-float strtof(const char* restrict str, char** restrict str_end);
-double strtod(const char* restrict str, char** restrict str_end);
-long double strtold(const char* restrict str, char** restrict str_end);
-
-//Null Terminated Multibyte String Functions
-
-//TODO implement or decide whether unicode makes sense to spend time on
-int mblen(const char* s, size_t n);//TODO
-int mbtowc(wchar_t* restrict pwc, const char* restrict s, size_t n);//TODO
-int wctomb(char* s, wchar_t wc);//TODO
-errno_t wctomb_s(int* restrict status, char* restrict s, rsize_t ssz, wchar_t wc);//TODO
-size_t mbstowcs(wchar_t* restrict dst, const char* restrict src, size_t len);//TODO
-errno_t mbstowcs_s(size_t* restrict retval, wchar_t* restrict dst, rsize_t dstsz, const char* restrict src, rsize_t len);//TODO
-size_t wcstombs(char* dst, const wchar_t* src, size_t len);//TODO
-errno_t wcstombs_s(size_t* restrict retval, char* restrict dst, rsize_t dstsz, const wchar_t* restrict src, rsize_t len);//TODO
+double atof(const char* str);//TODO
+int atoi(const char* str);//TODO
+long atol(const char* str);//TODO
+long long atoll(const char* str);//TODO
+long strtol(const char* restrict str, char** str_end, int base);//TODO
+long long strtoll(const char* restrict str, char** restrict str_end, int base);//TODO
+unsigned long strtoul(const char* restrict str, char** restrict str_end, int base);//TODO
+unsigned long long strtoull(const char* restrict str, char** restrict str_end, int base);//TODO
+float strtof(const char* restrict str, char** restrict str_end);//TODO
+double strtod(const char* restrict str, char** restrict str_end);//TODO
+long double strtold(const char* restrict str, char** restrict str_end);//TODO
 
 /* Pseudo-Random Number Generation */
 int rand();

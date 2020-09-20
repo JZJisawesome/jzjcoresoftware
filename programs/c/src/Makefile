@@ -29,8 +29,8 @@ $(BUILDDIR)/libjzjcore.a: $(SRCDIR)/libjzjcore/JZJCoreLib.S | $(BUILDDIR)/libjzj
 ##C library
 #TODO more will need to be added here as the library expands
 
-$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec/ctype.o $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/random.o $(BUILDDIR)/libjzjcorec/String.o $(BUILDDIR)/libjzjcorec/string.o $(BUILDDIR)/libjzjcorec/math/integer.o
-	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/ctype.o $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/random.o $(BUILDDIR)/libjzjcorec/String.o $(BUILDDIR)/libjzjcorec/string.o $(BUILDDIR)/libjzjcorec/math/integer.o
+$(BUILDDIR)/libjzjcorec.a: $(BUILDDIR)/libjzjcorec/ctype.o $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/random.o $(BUILDDIR)/libjzjcorec/String.o $(BUILDDIR)/libjzjcorec/string.o $(BUILDDIR)/libjzjcorec/math/abs.o $(BUILDDIR)/libjzjcorec/math/division.o
+	ar rcs $(BUILDDIR)/libjzjcorec.a $(BUILDDIR)/libjzjcorec/ctype.o $(BUILDDIR)/libjzjcorec/stdlib.o $(BUILDDIR)/libjzjcorec/random.o $(BUILDDIR)/libjzjcorec/String.o $(BUILDDIR)/libjzjcorec/string.o $(BUILDDIR)/libjzjcorec/math/abs.o $(BUILDDIR)/libjzjcorec/math/division.o
 
 $(BUILDDIR)/libjzjcorec/ctype.o: $(SRCDIR)/libjzjcorec/ctype.S | $(BUILDDIR)/libjzjcorec
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/ctype.S -o $(BUILDDIR)/libjzjcorec/ctype.o
@@ -47,8 +47,11 @@ $(BUILDDIR)/libjzjcorec/String.o: $(SRCDIR)/libjzjcorec/String.c | $(BUILDDIR)/l
 $(BUILDDIR)/libjzjcorec/string.o: $(SRCDIR)/libjzjcorec/string.S | $(BUILDDIR)/libjzjcorec
 	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/string.S -o $(BUILDDIR)/libjzjcorec/string.o
 #Math
-$(BUILDDIR)/libjzjcorec/math/integer.o: $(SRCDIR)/libjzjcorec/math/integer.S | $(BUILDDIR)/libjzjcorec/math
-	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/math/integer.S -o $(BUILDDIR)/libjzjcorec/math/integer.o
+$(BUILDDIR)/libjzjcorec/math/abs.o: $(SRCDIR)/libjzjcorec/math/abs.S | $(BUILDDIR)/libjzjcorec/math
+	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/math/abs.S -o $(BUILDDIR)/libjzjcorec/math/abs.o
+
+$(BUILDDIR)/libjzjcorec/math/division.o: $(SRCDIR)/libjzjcorec/math/division.S | $(BUILDDIR)/libjzjcorec/math
+	$(CC) $(CFLAGS) $(INC) -c $(SRCDIR)/libjzjcorec/math/division.S -o $(BUILDDIR)/libjzjcorec/math/division.o
 
 ##C runtime
 $(BUILDDIR)/crt0.o: $(SRCDIR)/crt0.s | $(BUILDDIR)

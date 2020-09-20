@@ -41,7 +41,7 @@ void main()
     
     //TODO organize the above tests better
     
-    /* More Organized Section */
+    /* Organized Sections */
     
     PORT6 = state++;
     randTest();
