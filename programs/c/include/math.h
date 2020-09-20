@@ -19,6 +19,9 @@
 //TODO define and implement
 //Floating point manipulation functions
 //TODO there are more that should be here
+int ilogbf(float arg);
+int ilogb(double arg);
+int ilogbl(long double arg);//TODO
 float copysignf(float x, float y);
 double copysign(double x, double y);
 long double copysignl(long double x, long double y);//TODO

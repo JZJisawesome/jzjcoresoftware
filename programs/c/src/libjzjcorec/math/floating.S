@@ -1,6 +1,22 @@
 #Simple software floating point routines for the math.h c header
 .text
 
+#TODO ensure the implementation of ilogbf and ilogb are correct
+
+.global ilogbf
+ilogbf:#float arg
+    #The exponent is bits 30:23 of arg
+    slli a0, a0, 23#Shift exponent to bits 7:0
+    andi a0, a0, 0x000000FF#Get rid of the sign bit
+    ret#int
+
+.global ilogb
+ilogb:#double arg
+    #The exponent is bits 30:23 of arg most significant word
+    slli a0, a1, 20#Shift exponent from msw to bits 10:0 of least significant word
+    andi a0, a0, 0x000007FF#Get rid of the sign bit
+    ret#int
+
 .global copysignf
 copysignf:#float x, float y
     #Sign bit is bit 31
