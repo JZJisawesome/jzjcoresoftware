@@ -26,6 +26,7 @@ int state = 1;
 static void randTest();
 static void ctypeTest();
 static void stringTest();
+static void parseTest();
 
 void main()
 {
@@ -60,7 +61,7 @@ void main()
     stringTest();
     
     PORT6 = state++;
-    PORT5 = atoi("123");
+    parseTest();
     
     //todo test abs.S functions
     //todo test division.S functions
@@ -143,4 +144,9 @@ static void stringTest()
     
     for (int i = 0; i < 40; ++i)
         PORT5 = teststring[i];
+}
+
+static void parseTest()
+{
+    PORT5 = atoi(" \t51423678abc");
 }
