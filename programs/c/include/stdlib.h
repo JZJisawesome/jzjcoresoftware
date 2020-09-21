@@ -32,8 +32,8 @@ int at_quick_exit(void (*func)(void));//TODO stdlib.S
 
 //Null Terminated String Parsing
 double atof(const char* str);//TODO String.c
-int atoi(const char* str);//TODO String.c
-long atol(const char* str);//TODO String.c
+int atoi(const char* str);
+long atol(const char* str);
 long long atoll(const char* str);//TODO String.c
 long strtol(const char* restrict str, char** str_end, int base);//TODO String.c
 long long strtoll(const char* restrict str, char** restrict str_end, int base);//TODO String.c

@@ -144,9 +144,14 @@ static void stringTest()
     
     for (int i = 0; i < 40; ++i)
         PORT5 = teststring[i];
+    
+    state++;
+    
+    PORT5 = strlen(teststring);
 }
 
 static void parseTest()
 {
     PORT5 = atoi(" \t51423678abc");
+    PORT5 = atol("\t 1234543987zxy");
 }

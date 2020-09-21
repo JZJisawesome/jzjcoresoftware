@@ -13,7 +13,7 @@
 //TODO lots left to implement
 
 //Idea of multiplying by 10 each time rather than an exponent function, using a char instead of an int literal for parsing (more readable), and reminder to stop if null is encountered thanks to: https://www.geeksforgeeks.org/write-your-own-atoi/
-int atoi(const char* str)//TODO make faster
+int atoi(const char* str)//TODO make faster//TODO support sign before number
 {
     //Get rid of leading whitespace
     while (isspace(str[0]))
@@ -32,9 +32,7 @@ int atoi(const char* str)//TODO make faster
     {
         //Multiply existing decimal digits in returnValue by 10
         //Effectively shifting decimal places left rather than bits after each addition of a digit
-        int returnValueTimesTwo = returnValue << 1;
-        returnValue <<= 3;//Multiply returnValue by 8
-        returnValue += returnValueTimesTwo;//Add returnValue to itself 2 more times to effectively multiply by 10
+        returnValue *= 10;//The compiler will translate this to (returnValue << 3) + (returnValue << 1)
         
         int parsedCharacterValue = str[i] - '0';//Parse digit to a number
         returnValue += parsedCharacterValue;//Add the next decimal digit to the value to be returned
@@ -42,6 +40,9 @@ int atoi(const char* str)//TODO make faster
     
     return returnValue;
 }
+
+//long is the same as int for RV32I
+long atol(const char* str) __attribute__ ((alias("atoi")));
 
 /* Manipulation and Comparison Functions For string.h */
 

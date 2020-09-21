@@ -10,7 +10,7 @@ strcpy:#char* dest, const char* src
     mv t0, a0#Save original location of dest to t0
     
 1:  #Copy Loop
-    lb t1, 0(a1)#Load character currently at current src offset
+    lbu t1, 0(a1)#Load character currently at current src offset
     sb t1, 0(a0)#Store character to current dest offset
     addi a1, a1, 1#Increment src offset
     addi a0, a0, 1#Increment dest offset
@@ -26,6 +26,21 @@ strxfrm:#char* restrict dest, const char* restrict src, size_t count
     #strcoll is the same as strcmp. This means that we don't have to change the strings at all; we just have
     #to return the count parameter
     mv a0, a2#Move count to a0 to be returned
+    ret#size_t
+    
+/* String Examination */
+
+.global strlen#TODO make faster
+strlen:#const char *str
+    li t0, -1#Load the counting variable with -1 to offset the first loop iteration
+    
+1:  #Counting loop
+    lbu t1, 0(a0)#Get the character at the index
+    addi a0, a0, 1#Add 1 to the index of the string to access
+    addi t0, t0, 1#Add 1 to the count (although this is done before the branch is executed, the extra count that would occur is offset by t0's initial value of -1)
+    bnez t1, 1b#Continue looping if the null byte was not encountered
+    
+    mv a0, t0#Move the count to a0 to be returned
     ret#size_t
 
 /* Character Array Manipulation */
@@ -49,7 +64,7 @@ memcpy:#void* dest, const void* src, size_t count
     mv t0, a0#Save original location of dest to t0
     
 1:  #Copy loop
-    lb t1, 0(a1)#Load character currently at current src offset
+    lbu t1, 0(a1)#Load character currently at current src offset
     sb t1, 0(a0)#Store character to current dest offset
     addi a1, a1, 1#Increment src offset
     addi a0, a0, 1#Increment dest offset
