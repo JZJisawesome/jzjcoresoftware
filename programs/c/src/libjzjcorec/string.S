@@ -1,4 +1,5 @@
-#Implements simple string functions for the string.h header (not the more complicated parsing stuff) 
+#Implements simple string functions for the string.h header (not the more complicated parsing stuff)
+#TODO should probably split up into more files
 .text
 
 #TODO lots left to implement
@@ -42,8 +43,47 @@ strlen:#const char *str
     
     mv a0, t0#Move the count to a0 to be returned
     ret#size_t
+    
+.global strcmp
+strcmp:#const char* lhs, const char* rhs
+.global strcoll#Always using the default C locale
+strcoll:#const char* lhs, const char* rhs
+    mv t0, a0#Move lhs to t0 (makes it easier to return things later)
+
+1:  #Comparison loop
+    lbu t1, 0(t0)#Load character at rhs
+    
+    #TODO
+    
+    ret#int
+
 
 /* Character Array Manipulation */
+
+.global memcmp#TODO try to speed things up by using sw instruction instead and other things
+memcmp:#const void* lhs, const void* rhs, size_t count
+    mv t0, a0#Move lhs to t0 (makes it easier to return things later)
+    
+1:  #Comparison loop
+    lbu t1, 0(t0)#Load character at current lhs to t1
+    lbu t2, 0(a1)#Load character at current rhs to t2
+    blt t1, t2, 2f#Return negative value if lhs[x] < rhs[x]
+    bgt t1, t2, 2f#Return positive value if lhs[x] > rhs[x]
+    #Continue if the lhs[x] == rhs[x]
+    addi t0, t0, 1#Increment lhs
+    addi a1, a1, 1#Increment rhs
+    addi a2, a2, -1#Decrement count (the number of characters we have left to compare)
+    bnez a2, 1b#Keep looping until we are done counting (count == 0)
+
+    #All characters were equal
+    li a0, 0
+    ret#int
+2:  #lhs[x] < rhs[x]
+    li a0, -1#Return negative value
+    ret#int
+3:  #lhs[x] > rhs[x]
+    li a0, 1#Return positive value
+    ret#int
 
 .global memset#TODO try to speed things up by using sw instruction instead
 memset:#void* dest, int ch, size_t count
@@ -52,7 +92,7 @@ memset:#void* dest, int ch, size_t count
 1:  #Write loop
     sb a1, 0(a0)#Store ch to current dest offset
     addi a0, a0, 1#Increment dest offset
-    addi a2, a2, -1#Decrement count (the number of characters we have left fill)
+    addi a2, a2, -1#Decrement count (the number of characters we have left to fill)
     bnez a2, 1b#Keep looping until we are done counting (count == 0)
 
     #dest now contains the same data as src, but we must return the original value of &dest
