@@ -30,14 +30,14 @@ strxfrm:#char* restrict dest, const char* restrict src, size_t count
     
 /* String Examination */
 
-.global strlen#TODO make faster
+.global strlen#TODO make faster (lw instruction, more efficient looping/counting)
 strlen:#const char *str
     li t0, -1#Load the counting variable with -1 to offset the first loop iteration
     
 1:  #Counting loop
     lbu t1, 0(a0)#Get the character at the index
     addi a0, a0, 1#Add 1 to the index of the string to access
-    addi t0, t0, 1#Add 1 to the count (although this is done before the branch is executed, the extra count that would occur is offset by t0's initial value of -1)
+    addi t0, t0, 1#Add 1 to the count (although this is done before the branch is executed, the extra increment is offset by t0's initial value of -1)
     bnez t1, 1b#Continue looping if the null byte was not encountered
     
     mv a0, t0#Move the count to a0 to be returned

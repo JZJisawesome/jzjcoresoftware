@@ -10,7 +10,7 @@ char* strncat(char* restrict dest, const char* restrict src, size_t count);//TOD
 size_t strxfrm(char* restrict dest, const char* restrict src, size_t count);
 
 //String Examination
-size_t strlen(const char* str);//TODO string.S
+size_t strlen(const char* str);
 int strcmp(const char* lhs, const char* rhs);//TODO String.c
 int strncmp(const char* lhs, const char* rhs, size_t count);//TODO String.c
 int strcoll(const char* lhs, const char* rhs);//TODO String.c (same implementation as strcmp probably)
@@ -30,7 +30,6 @@ void* memcpy(void* dest, const void* src, size_t count);
 void* memmove(void* dest, const void* src, size_t count);//TODO String.c
 
 //Errno to string functions
-char* strerror(int errnum);//TODO string.S
-size_t strerrorlen_s(errno_t errnum);//TODO string.S
+char* strerror(int errnum);
 
 #endif

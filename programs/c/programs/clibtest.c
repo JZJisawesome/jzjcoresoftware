@@ -148,6 +148,12 @@ static void stringTest()
     state++;
     
     PORT5 = strlen(teststring);
+    
+    state++;
+    
+    char* errorText = strerror(0);
+    for (int i = 0; i < 16; ++i)
+        PORT5 = errorText[i];
 }
 
 static void parseTest()
