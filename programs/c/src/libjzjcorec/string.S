@@ -67,8 +67,7 @@ memcmp:#const void* lhs, const void* rhs, size_t count
 1:  #Comparison loop
     lbu t1, 0(t0)#Load character at current lhs to t1
     lbu t2, 0(a1)#Load character at current rhs to t2
-    blt t1, t2, 2f#Return negative value if lhs[x] < rhs[x]
-    bgt t1, t2, 2f#Return positive value if lhs[x] > rhs[x]
+    bne t1, t2, 2f#Break from loop if characters were not equal
     #Continue if the lhs[x] == rhs[x]
     addi t0, t0, 1#Increment lhs
     addi a1, a1, 1#Increment rhs
@@ -78,9 +77,13 @@ memcmp:#const void* lhs, const void* rhs, size_t count
     #All characters were equal
     li a0, 0
     ret#int
-2:  #lhs[x] < rhs[x]
+    
+2:  #lhs[x] != rhs[x]
+    bgtu t1, t2, 3f#Determine if lhs[x] > rhs[x]
+    #lhs[x] < rhs[x]
     li a0, -1#Return negative value
     ret#int
+    
 3:  #lhs[x] > rhs[x]
     li a0, 1#Return positive value
     ret#int
